@@ -1,31 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/shared/Container.astro';
-import Breadcrumbs from '../components/shared/Breadcrumbs.astro';
+import PageHero from '../components/shared/PageHero.astro';
 import ContactForm from '../components/contact/ContactForm.astro';
 import ContactInfo from '../components/contact/ContactInfo.astro';
 ---
 
 <BaseLayout
-  title="Contact Us | Invigosol"
-  description="Get in touch with Invigosol to discuss your technology project. We respond within one business day."
+  title="Contact InvigoSol | Book an AI Consultation"
+  description="Talk to InvigoSol about AI agents, LLM apps, automation, WhatsApp Business API or cloud engineering. Free 30-minute consultation; we reply within one business day."
   canonicalPath="/contact"
 >
-  <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-16 sm:py-20">
-    <Container>
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
-        Let's Build Something Intelligent
-      </h1>
-      <p class="mt-4 text-lg sm:text-xl text-primary-100 max-w-3xl">
-        Whether you have a specific project in mind or want to explore how AI-native engineering can
-        transform your business — we'd love to hear from you.
-      </p>
-    </Container>
-  </section>
+  <PageHero
+    eyebrow="Contact"
+    title="Let's build something intelligent"
+    subtitle="Tell us what you want to achieve. We will reply within one business day with honest advice and next steps."
+    breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
+  />
 
-  <section class="py-16 sm:py-20">
+  <section class="py-20 sm:py-24">
     <Container>
       <div class="grid gap-10 lg:grid-cols-5">
         <div class="lg:col-span-3">

@@ -1,0 +1,83 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import LegalEntity from '../components/shared/LegalEntity.astro';
+import { company } from '../data/company';
+
+const mailto = `mailto:${company.privacyEmail}?subject=${encodeURIComponent('Data deletion request')}`;
+
+const sections = [
+  { id: 'request', label: '1. Ask us to delete' },
+  { id: 'facebook', label: '2. Remove our app in Facebook' },
+  { id: 'what', label: '3. What we delete' },
+  { id: 'keep', label: '4. What we may keep' },
+  { id: 'confirm', label: '5. Confirmation' },
+  { id: 'bizagent', label: '6. BizAgent users' },
+  { id: 'contact', label: '7. Contact' },
+];
+---
+
+<LegalLayout
+  title="Data Deletion Instructions | InvigoSol"
+  heading="Data Deletion"
+  description="How to ask InvigoSol to delete your data, and how to remove InvigoSol apps that use Facebook Login for Business or the WhatsApp Business Platform."
+  intro="You can ask us to delete the personal data we hold about you at any time, including data we received through Facebook Login for Business and the WhatsApp Business Platform."
+  canonicalPath="/data-deletion"
+  sections={sections}
+>
+  <h2 id="request">1. Ask us to delete your data</h2>
+  <p>
+    Email <a href={mailto}>{company.privacyEmail}</a> with the subject <strong>"Data deletion request"</strong>. Please send
+    it from the email address linked to your account and include:
+  </p>
+  <ul>
+    <li>the name of the app or service (for example, the app you connected with Facebook);</li>
+    <li>the business name and, if relevant, the WhatsApp business phone number that was connected.</li>
+  </ul>
+  <p>If you write from a different address, we will ask you to confirm that you own the account before we delete anything.</p>
+
+  <h2 id="facebook">2. Remove our app from your Facebook account</h2>
+  <p>This stops the app from receiving any new data from Meta straight away.</p>
+  <ol class="mt-2 list-decimal pl-5 space-y-1.5 text-neutral-700">
+    <li>Open Facebook and go to <strong>Settings &amp; privacy → Settings</strong>.</li>
+    <li>Open <strong>Business integrations</strong> (or <strong>Apps and websites</strong>, depending on how you connected).</li>
+    <li>Find the InvigoSol app (or BizAgent) and select <strong>Remove</strong>.</li>
+  </ol>
+  <p class="mt-3">
+    In <strong>Meta Business Suite → Settings → Integrations / Connected apps</strong>, an admin can also remove the app from the
+    business portfolio and the WhatsApp Business Account. Removing the app revokes access, but it does not delete data we
+    already hold. To delete that data, also send the request in step 1.
+  </p>
+
+  <h2 id="what">3. What we delete</h2>
+  <p>Within <strong>30 days</strong> of a verified request, we permanently delete:</p>
+  <ul>
+    <li>your account and profile data (name, email, Facebook user ID);</li>
+    <li>connected business details (business portfolio ID, WhatsApp Business Account ID, phone number ID);</li>
+    <li>access tokens and keys (deleted immediately);</li>
+    <li>stored messages, media, message status data and templates;</li>
+    <li>everything our apps generated from that data, such as summaries, categories and reports.</li>
+  </ul>
+  <p>Encrypted backups are overwritten on their normal cycle and are not restored except for disaster recovery.</p>
+
+  <h2 id="keep">4. What we may keep</h2>
+  <p>
+    We keep only what the law requires, such as invoices and payment records, and a short record that the deletion request
+    was completed. These records are not used for any other purpose.
+  </p>
+
+  <h2 id="confirm">5. Confirmation</h2>
+  <p>
+    We email you when the deletion is complete.
+  </p>
+
+  <h2 id="bizagent">6. BizAgent users</h2>
+  <p>
+    If you use BizAgent, follow the instructions at
+    <a href="https://bizagent.pk/data-deletion/">bizagent.pk/data-deletion</a>. BizAgent is also operated by {company.legalName},
+    so a request sent to either address reaches the same team.
+  </p>
+
+  <h2 id="contact">7. Contact</h2>
+  <LegalEntity />
+  <p>See also our <a href="/privacy">privacy policy</a>.</p>
+</LegalLayout>

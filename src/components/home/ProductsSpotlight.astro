@@ -1,0 +1,63 @@
+---
+import Container from '../shared/Container.astro';
+import Button from '../shared/Button.astro';
+import { products } from '../../data/products';
+import { CheckCircle2, ArrowUpRight } from '@lucide/astro';
+
+const bizagent = products.find((p) => p.slug === 'bizagent')!;
+---
+
+<section class="py-20 sm:py-24 bg-ink-950 text-white overflow-hidden">
+  <Container>
+    <div class="grid gap-14 lg:grid-cols-2 items-center">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary-400">Our product</p>
+        <img src={bizagent.logoDark} alt={bizagent.name} width="200" height="48" class="mt-5 h-11 w-auto" />
+        <h2 class="mt-6 text-3xl sm:text-4xl font-bold">{bizagent.tagline}</h2>
+        <p class="mt-4 text-lg text-neutral-300 leading-relaxed">{bizagent.description}</p>
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+          {bizagent.highlights.slice(0, 4).map((h) => (
+            <li class="flex items-start gap-2.5 text-sm text-neutral-300">
+              <CheckCircle2 class="h-5 w-5 text-primary-400 shrink-0" />
+              {h.title}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10 flex flex-col sm:flex-row gap-3">
+          <Button href={`/products/${bizagent.slug}`}>Discover BizAgent</Button>
+          <Button href={bizagent.url} variant="outline-white" external>
+            Visit bizagent.pk <ArrowUpRight class="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+
+      <div aria-hidden="true">
+        <div class="relative mx-auto max-w-md">
+          <div class="absolute inset-0 -m-8 rounded-[2.5rem] brand-gradient opacity-25 blur-3xl"></div>
+          <div class="relative rounded-3xl border border-white/10 bg-neutral-900 p-6 shadow-2xl">
+            <p class="text-xs font-medium uppercase tracking-wider text-neutral-500">Daily report · 9:00</p>
+            <p class="mt-3 text-lg font-semibold">Yesterday your team handled 142 customers.</p>
+            <div class="mt-5 grid grid-cols-3 gap-3 text-center">
+              <div class="rounded-2xl bg-white/5 p-3">
+                <p class="text-2xl font-bold text-primary-400">6</p>
+                <p class="text-[11px] text-neutral-400">Unanswered</p>
+              </div>
+              <div class="rounded-2xl bg-white/5 p-3">
+                <p class="text-2xl font-bold">11m</p>
+                <p class="text-[11px] text-neutral-400">First reply</p>
+              </div>
+              <div class="rounded-2xl bg-white/5 p-3">
+                <p class="text-2xl font-bold text-accent-400">4</p>
+                <p class="text-[11px] text-neutral-400">Hot leads</p>
+              </div>
+            </div>
+            <p class="mt-5 rounded-2xl bg-primary-600/15 p-4 text-sm text-primary-200">
+              2 complaints are still open. Want me to draft replies for your approval?
+            </p>
+            <p class="mt-3 text-center text-[11px] text-neutral-500">Illustrative example</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,5 +1,8 @@
 # Invigosol.com — Website Implementation Plan
 
+> **Historical (v1).** This is the original build plan. For the current site (orange rebrand, 8 services, BizAgent
+> product, legal pages for Meta verification) see `site-reference.md` and `site-content.md`.
+
 ## 1. Overview
 
 **Company:** Invigosol  
@@ -443,7 +446,7 @@ No backend required. The HTML form posts directly to Formspree's endpoint.
 
 - **Blog** — MDX-based blog for content marketing and SEO
 - **CMS integration** — Contentful or Sanity if non-developers need to edit content
-- **OpenClaw landing page** — Dedicated sub-site or expanded section for the OpenClaw product
 - **Analytics** — Plausible or Fathom (privacy-friendly) or Google Analytics
 - **Internationalization** — Multi-language support if needed
 - **Dark mode** — Toggle between light/dark themes
+- **Case studies** — Real client stories with permission (replace removed placeholder testimonials)

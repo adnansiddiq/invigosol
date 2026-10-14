@@ -1,21 +1,35 @@
 ---
 import Container from '../shared/Container.astro';
 import Button from '../shared/Button.astro';
+import { ArrowRight } from '@lucide/astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Have an AI idea or a process that eats your team’s time?',
+  subtitle = 'Tell us about it. In a free 30-minute call we will tell you honestly what AI can do, what it costs and how fast you can see results.',
+} = Astro.props;
 ---
 
-<section class="py-16 sm:py-20 bg-gradient-to-r from-primary-600 to-primary-800 text-white">
-  <Container class="text-center">
-    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold">
-      Ready to Build Something Intelligent?
-    </h2>
-    <p class="mt-4 text-primary-100 max-w-xl mx-auto text-lg">
-      Whether you're modernizing legacy systems, building AI-native products, or scaling your
-      engineering operations — we're ready when you are.
-    </p>
-    <div class="mt-8">
-      <Button href="/contact" variant="white" size="lg">
-        Let's Talk
-      </Button>
+<section class="py-20 sm:py-24">
+  <Container>
+    <div class="relative overflow-hidden rounded-3xl brand-gradient px-6 py-14 sm:px-14 sm:py-16 text-white">
+      <div class="absolute -right-10 -bottom-16 h-72 w-72 opacity-20" aria-hidden="true">
+        <img src="/images/brand/logo-mark.png" alt="" width="288" height="288" class="brightness-0 invert" loading="lazy" />
+      </div>
+      <div class="relative max-w-2xl">
+        <h2 class="text-3xl sm:text-4xl font-extrabold">{title}</h2>
+        <p class="mt-4 text-lg text-white/90">{subtitle}</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <Button href="/contact" variant="secondary" size="lg">
+            Book a consultation <ArrowRight class="h-5 w-5" />
+          </Button>
+          <Button href="mailto:hello@invigosol.com" variant="outline-white" size="lg">hello@invigosol.com</Button>
+        </div>
+      </div>
     </div>
   </Container>
 </section>

@@ -1,20 +1,31 @@
 ---
 interface Props {
   title: string;
+  eyebrow?: string;
   subtitle?: string;
   align?: 'center' | 'left';
+  tone?: 'light' | 'dark';
   class?: string;
 }
 
-const { title, subtitle, align = 'center', class: className } = Astro.props;
+const { title, eyebrow, subtitle, align = 'center', tone = 'light', class: className } = Astro.props;
 ---
 
-<div class:list={[align === 'center' ? 'text-center' : 'text-left', className]}>
-  <h2 class="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+<div class:list={[align === 'center' ? 'text-center mx-auto' : 'text-left', 'max-w-3xl', className]}>
+  {eyebrow && (
+    <p class="text-sm font-semibold uppercase tracking-widest text-primary-600">{eyebrow}</p>
+  )}
+  <h2
+    class:list={[
+      'text-3xl font-bold tracking-tight sm:text-4xl',
+      eyebrow && 'mt-3',
+      tone === 'light' ? 'text-neutral-950' : 'text-white',
+    ]}
+  >
     {title}
   </h2>
   {subtitle && (
-    <p class="mt-4 text-lg text-neutral-600 max-w-3xl" class:list={[align === 'center' && 'mx-auto']}>
+    <p class:list={['mt-4 text-lg', tone === 'light' ? 'text-neutral-600' : 'text-neutral-400']}>
       {subtitle}
     </p>
   )}

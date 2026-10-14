@@ -1,0 +1,59 @@
+---
+// Shared shell for privacy, terms and data-deletion pages: hero, "last updated" line and a sticky contents list.
+import BaseLayout from './BaseLayout.astro';
+import Container from '../components/shared/Container.astro';
+import PageHero from '../components/shared/PageHero.astro';
+import { company } from '../data/company';
+
+interface Props {
+  title: string;
+  heading: string;
+  description: string;
+  intro: string;
+  canonicalPath: string;
+  sections: { id: string; label: string }[];
+}
+
+const { title, heading, description, intro, canonicalPath, sections } = Astro.props;
+
+const updated = new Date(company.legal.updated).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath}>
+  <PageHero
+    eyebrow="Legal"
+    title={heading}
+    subtitle={intro}
+    breadcrumbs={[{ label: 'Home', href: '/' }, { label: heading }]}
+  >
+    <p class="mt-6 text-sm text-neutral-400">Last updated: <time datetime={company.legal.updated}>{updated}</time></p>
+  </PageHero>
+
+  <section class="py-16 sm:py-20">
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-12">
+        <aside class="lg:col-span-3">
+          <nav aria-label="On this page" class="lg:sticky lg:top-28">
+            <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500">On this page</p>
+            <ol class="mt-4 space-y-1 border-l border-neutral-200">
+              {sections.map((s) => (
+                <li>
+                  <a href={`#${s.id}`} class="-ml-px block border-l border-transparent py-1.5 pl-4 text-sm text-neutral-600 hover:border-primary-600 hover:text-neutral-950">
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+        <article class="prose-legal lg:col-span-9 max-w-3xl min-w-0">
+          <slot />
+        </article>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

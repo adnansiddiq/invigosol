@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/shared/Container.astro';
+import PageHero from '../../components/shared/PageHero.astro';
+import Button from '../../components/shared/Button.astro';
+import SectionHeading from '../../components/shared/SectionHeading.astro';
+import FaqSection from '../../components/shared/FaqSection.astro';
+import CTASection from '../../components/home/CTASection.astro';
+import { products, type Product } from '../../data/products';
+import { company } from '../../data/company';
+import { ArrowUpRight, CheckCircle2, Languages, ShieldCheck } from '@lucide/astro';
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+
+const lowestUsd = Math.min(...product.plans.map((p) => Number(p.usd)));
+
+const appJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: product.name,
+  description: product.description,
+  url: product.url,
+  applicationCategory: product.category,
+  operatingSystem: 'Web',
+  inLanguage: ['en', 'ur', 'ar'],
+  publisher: { '@id': `${company.siteUrl}/#organization` },
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'USD',
+    lowPrice: lowestUsd,
+    offerCount: product.plans.length,
+  },
+};
+---
+
+<BaseLayout
+  title={product.meta.title}
+  description={product.meta.description}
+  canonicalPath={`/products/${product.slug}`}
+  ogType="product"
+  jsonLd={[appJsonLd]}
+>
+  <PageHero
+    eyebrow={`${product.name} by InvigoSol`}
+    title={product.tagline}
+    subtitle={product.description}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Products', href: '/products' },
+      { label: product.name },
+    ]}
+  >
+    <div class="mt-9 flex flex-col sm:flex-row gap-3">
+      <Button href={product.url} size="lg" external>Visit {new URL(product.url).hostname} <ArrowUpRight class="h-5 w-5" /></Button>
+      {product.appUrl && (
+        <Button href={`${product.appUrl}/signup`} variant="outline-white" size="lg" external>Start the free pilot</Button>
+      )}
+    </div>
+  </PageHero>
+
+  <!-- Overview -->
+  <section class="py-20 sm:py-24">
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-5">
+        <div class="lg:col-span-3">
+          <img src={product.logo} alt={product.name} width="220" height="52" class="h-12 w-auto" />
+          <p class="mt-8 text-xl text-neutral-800 leading-relaxed">{product.longDescription}</p>
+        </div>
+        <div class="lg:col-span-2 space-y-4">
+          <div class="rounded-2xl bg-neutral-50 border border-neutral-200 p-6">
+            <p class="text-sm font-semibold text-neutral-950">Built for</p>
+            <p class="mt-1 text-sm text-neutral-600 leading-relaxed">{product.audience}</p>
+          </div>
+          <div class="rounded-2xl bg-neutral-50 border border-neutral-200 p-6 flex gap-3">
+            <Languages class="h-5 w-5 text-primary-600 shrink-0" />
+            <div>
+              <p class="text-sm font-semibold text-neutral-950">Understands</p>
+              <p class="mt-1 text-sm text-neutral-600">{product.languages.join(', ')}, including mixed messages.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Highlights -->
+  <section class="py-20 sm:py-24 bg-neutral-50">
+    <Container>
+      <SectionHeading eyebrow="Features" title={`What ${product.name} does`} />
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {product.highlights.map((h) => (
+          <div class="rounded-2xl border border-neutral-200 bg-white p-7">
+            <CheckCircle2 class="h-6 w-6 text-primary-600" />
+            <h3 class="mt-4 text-lg font-bold text-neutral-950">{h.title}</h3>
+            <p class="mt-2 text-sm text-neutral-600 leading-relaxed">{h.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-20 sm:py-24">
+    <Container>
+      <SectionHeading eyebrow="How it works" title="Up and running in one call" />
+      <ol class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {product.steps.map((s, i) => (
+          <li class="rounded-2xl border border-neutral-200 p-6">
+            <span class="font-[family-name:var(--font-brand)] text-4xl font-extrabold italic text-primary-500">0{i + 1}</span>
+            <h3 class="mt-2 text-lg font-bold text-neutral-950">{s.title}</h3>
+            <p class="mt-1 text-sm text-neutral-600 leading-relaxed">{s.description}</p>
+          </li>
+        ))}
+      </ol>
+    </Container>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-20 sm:py-24 bg-ink-950 text-white">
+    <Container>
+      <SectionHeading eyebrow="Pricing" title="Simple monthly plans" subtitle={product.pricingNote} tone="dark" />
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {product.plans.map((plan) => (
+          <div class:list={['rounded-2xl p-7', plan.featured ? 'brand-gradient text-white' : 'border border-white/10 bg-white/[0.03]']}>
+            <p class="text-sm font-semibold uppercase tracking-wider">{plan.name}</p>
+            <p class="mt-4 text-3xl font-extrabold">PKR {plan.pkr}<span class="text-base font-medium opacity-80"> /mo</span></p>
+            <p class:list={['text-sm', plan.featured ? 'text-white/85' : 'text-neutral-400']}>or ${plan.usd} / month</p>
+            <p class:list={['mt-5 text-sm leading-relaxed', plan.featured ? 'text-white' : 'text-neutral-300']}>{plan.summary}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-sm text-neutral-400">
+        Full plan details at <a href={`${product.url}/pricing/`} class="text-primary-400 underline underline-offset-2 hover:text-primary-300" target="_blank" rel="noopener">{new URL(product.url).hostname}/pricing</a>.
+      </p>
+    </Container>
+  </section>
+
+  <FaqSection faqs={product.faqs} title={`${product.name} questions`} />
+
+  <!-- Trust and legal -->
+  <section class="pb-8">
+    <Container>
+      <div class="rounded-3xl border border-neutral-200 p-8 sm:p-10 flex flex-col md:flex-row gap-6 md:items-center">
+        <ShieldCheck class="h-10 w-10 text-primary-600 shrink-0" />
+        <div class="flex-1">
+          <h2 class="text-lg font-bold text-neutral-950">Operated by {company.legalName}</h2>
+          <p class="mt-1 text-sm text-neutral-600 leading-relaxed">
+            {product.name} is a product of {company.legalName}. We are responsible for the service and the data it processes.
+            Customer data is never sold or used for advertising.
+          </p>
+        </div>
+        <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium">
+          <li><a href={product.legal.privacy} class="text-primary-700 hover:underline" target="_blank" rel="noopener">Privacy policy</a></li>
+          <li><a href={product.legal.terms} class="text-primary-700 hover:underline" target="_blank" rel="noopener">Terms</a></li>
+          <li><a href={product.legal.dataDeletion} class="text-primary-700 hover:underline" target="_blank" rel="noopener">Data deletion</a></li>
+        </ul>
+      </div>
+    </Container>
+  </section>
+
+  <CTASection title={`Want something like ${product.name} for your business?`} subtitle="We build custom WhatsApp, email and AI automation tools on the same platform. Tell us what you need." />
+</BaseLayout>

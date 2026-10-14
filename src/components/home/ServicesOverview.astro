@@ -2,19 +2,24 @@
 import Container from '../shared/Container.astro';
 import SectionHeading from '../shared/SectionHeading.astro';
 import ServiceCard from '../services/ServiceCard.astro';
+import Button from '../shared/Button.astro';
 import { services } from '../../data/services';
 ---
 
-<section class="py-16 sm:py-20">
+<section class="py-20 sm:py-24 bg-neutral-50">
   <Container>
     <SectionHeading
-      title="What We Do"
-      subtitle="Six core capabilities. One seamless delivery engine."
+      eyebrow="Services"
+      title="Everything you need to put AI to work"
+      subtitle="From the first AI use case to the cloud it runs on, one accountable team."
     />
-    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {services.map((service) => (
         <ServiceCard service={service} />
       ))}
+    </div>
+    <div class="mt-12 text-center">
+      <Button href="/services" variant="outline">See all services</Button>
     </div>
   </Container>
 </section>

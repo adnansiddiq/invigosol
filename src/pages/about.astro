@@ -1,57 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/shared/Container.astro';
-import Breadcrumbs from '../components/shared/Breadcrumbs.astro';
+import PageHero from '../components/shared/PageHero.astro';
 import MissionVision from '../components/about/MissionVision.astro';
 import ValuesSection from '../components/about/ValuesSection.astro';
-import TeamSection from '../components/about/TeamSection.astro';
+import ProductsSpotlight from '../components/home/ProductsSpotlight.astro';
+import CTASection from '../components/home/CTASection.astro';
 ---
 
 <BaseLayout
-  title="About Invigosol — AI-Native Technology Services"
-  description="Learn about Invigosol's mission, values, and the team behind our AI-native technology services. Engineering intelligence for forward-thinking companies."
+  title="About InvigoSol | AI-Native Technology Company"
+  description="InvigoSol is an AI-native technology company that builds AI agents, LLM apps, WhatsApp integrations and cloud platforms, and makes the BizAgent product."
   canonicalPath="/about"
 >
-  <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-16 sm:py-20">
-    <Container>
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
-        We Engineer the Future of Software
-      </h1>
-      <p class="mt-4 text-lg sm:text-xl text-primary-100 max-w-3xl">
-        Invigosol is a technology services company built for the AI era. We help organizations
-        design, build, and operate intelligent systems that deliver measurable business outcomes.
-      </p>
-    </Container>
-  </section>
+  <PageHero
+    eyebrow="About us"
+    title="We engineer intelligence and deliver outcomes"
+    subtitle="InvigoSol is a technology company built for the AI era. We help businesses design, build and run intelligent systems that deliver measurable results, and we build our own products on the same stack."
+    breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'About' }]}
+  />
 
   <!-- Company Story -->
-  <section class="py-16 sm:py-20">
+  <section class="py-20 sm:py-24">
     <Container>
-      <div class="max-w-3xl">
-        <h2 class="text-3xl font-bold text-neutral-900 mb-6">Our Story</h2>
-        <div class="space-y-4 text-neutral-700 leading-relaxed">
+      <div class="grid gap-12 lg:grid-cols-5">
+        <div class="lg:col-span-2">
+          <p class="text-sm font-semibold uppercase tracking-widest text-primary-600">Our story</p>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-neutral-950">Outcomes, not output</h2>
+          <img src="/images/brand/logo-full.png" alt="InvigoSol, Tech & Solution" width="907" height="907" class="mt-8 hidden lg:block w-56 h-auto" loading="lazy" />
+        </div>
+        <div class="lg:col-span-3 space-y-5 text-lg text-neutral-700 leading-relaxed">
+          <p>InvigoSol was founded on a simple belief: technology services should deliver outcomes, not just output.</p>
           <p>
-            Invigosol was founded on a simple belief: technology services should deliver outcomes,
-            not just output.
+            Every company is becoming a software company, and every software company is becoming an AI company. Yet many
+            businesses are stuck with AI pilots that never reach production, and with teams that spend their days on
+            work software should do for them.
           </p>
           <p>
-            In a world where every company is becoming a software company — and every software
-            company is becoming an AI company — we saw a gap. Too many organizations were drowning in
-            consultants who delivered slide decks but not production systems. Too many engineering
-            teams were stuck maintaining legacy architecture while competitors shipped AI-native
-            products.
-          </p>
-          <p>We built Invigosol to close that gap.</p>
-          <p>
-            We are a team of engineers, architects, and product thinkers who operate at the
-            intersection of AI, modern engineering, and product strategy. We don't just advise — we
-            build. We don't just build — we own the outcome.
+            We are engineers, architects and product people working where AI, modern engineering and product strategy
+            meet. We don't just advise; we build, and we own the result.
           </p>
           <p>
-            From cloud infrastructure to autonomous agents, from MVP to scale — Invigosol is where
-            ambition meets execution.
+            We also build our own products. BizAgent, our WhatsApp and email monitoring app, runs on the same AI,
+            WhatsApp Cloud API and cloud stack we deliver for clients, so we learn from operating it every day.
           </p>
         </div>
       </div>
@@ -60,5 +51,6 @@ import TeamSection from '../components/about/TeamSection.astro';
 
   <MissionVision />
   <ValuesSection />
-  <TeamSection />
+  <ProductsSpotlight />
+  <CTASection />
 </BaseLayout>

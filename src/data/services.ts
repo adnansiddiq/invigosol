@@ -1,6 +1,8 @@
 export interface Service {
   slug: string;
   title: string;
+  /** Short label for menus and cards. */
+  shortTitle: string;
   tagline: string;
   description: string;
   longDescription: string;
@@ -15,6 +17,10 @@ export interface Service {
     title: string;
     description: string;
   }[];
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
   relatedSlugs: string[];
   meta: {
     title: string;
@@ -22,463 +28,560 @@ export interface Service {
   };
 }
 
+// Ordered by demand: the first services are the ones buyers search for most in 2026.
+// Slugs are kept stable so existing links and rankings are not lost.
 export const services: Service[] = [
   {
-    slug: 'it-services',
-    title: 'IT Services',
-    tagline: 'Enterprise infrastructure that runs — reliably, securely, and at scale.',
+    slug: 'agent-development',
+    title: 'AI Agent Development',
+    shortTitle: 'AI Agent Development',
+    tagline: 'Agents that do real work inside your systems, with guardrails, evaluations and a human in the loop.',
     description:
-      'Enterprise-grade infrastructure, cloud management, and technical operations — built for reliability at scale.',
+      'Custom AI agents and multi-agent workflows that act on your tools and data: support, sales ops, back office and internal copilots.',
     longDescription:
-      "Modern businesses run on technology. When that technology breaks, everything stops. Invigosol's IT Services ensure your critical systems are architected for resilience, managed with precision, and ready to scale with your growth. We handle the operational complexity so your engineering team can focus on building what's next.",
-    icon: 'Monitor',
+      'Most companies have tried a chatbot. Far fewer have an agent that reliably finishes a task: reads the ticket, checks the order system, drafts the refund, and asks a person to approve it. We design and build agentic systems on current frontier models, connect them to your tools through APIs and the Model Context Protocol (MCP), and ship them with the evaluations, permissions, audit logs and cost controls that production needs.',
+    icon: 'Bot',
     challenges: [
-      "Legacy infrastructure that can't keep pace with business growth",
-      'Security vulnerabilities and compliance gaps across cloud and on-premise environments',
-      'Fragmented systems that create data silos and operational inefficiency',
-      'Rising operational costs with diminishing returns on infrastructure investment',
+      'Agent demos that work once but fail on real, messy inputs',
+      'No safe way to let an AI act on business systems without risk',
+      'No evaluation suite, so nobody knows whether a prompt change made things better or worse',
+      'Model costs and latency that grow faster than usage',
     ],
     features: [
       {
-        title: 'Cloud Infrastructure Management',
+        title: 'Agentic workflow design',
         description:
-          'Design, migration, and ongoing management of cloud environments across AWS, Azure, and GCP. We optimize for performance, cost, and security — not just uptime.',
+          'We map the task, decide where an agent adds value and where a plain rule is better, and design tool-calling flows with clear approval steps.',
       },
       {
-        title: 'System Integration & Modernization',
+        title: 'MCP servers and tool integrations',
         description:
-          'Connect disparate systems into a unified, efficient technology ecosystem. We modernize legacy applications without the risk of big-bang migrations — incremental, tested, production-safe.',
+          'MCP servers and typed tool APIs that let agents read and act on your CRM, ERP, ticketing, email, WhatsApp and internal databases, with scoped permissions.',
       },
       {
-        title: 'Security & Compliance',
+        title: 'Multi-agent orchestration',
         description:
-          'Proactive security posture management, vulnerability assessments, and compliance frameworks (SOC 2, HIPAA, GDPR). Security is built in, not bolted on.',
+          'Planner, worker and reviewer agents that split long tasks, with shared memory, retries and hand-off to a human when confidence is low.',
       },
       {
-        title: '24/7 Technical Operations',
+        title: 'Evaluations and guardrails',
         description:
-          'Round-the-clock monitoring, incident response, and performance optimization. We use AI-driven observability to detect and resolve issues before they impact users.',
+          'Test sets built from your real cases, automated scoring, prompt-injection defences, PII redaction and policy checks before any action runs.',
       },
       {
-        title: 'Cost Optimization',
+        title: 'Observability and cost control',
         description:
-          'Continuous analysis of infrastructure spend with actionable recommendations. We typically reduce cloud costs by 20-40% without sacrificing performance.',
+          'Tracing for every model and tool call, per-task cost tracking, model routing and caching so the agent stays fast and affordable.',
+      },
+      {
+        title: 'Voice and messaging agents',
+        description:
+          'Agents that work where your customers are: WhatsApp, web chat, email and voice, with the same rules and audit trail across channels.',
       },
     ],
     processSteps: [
+      { step: 1, title: 'Discover', description: 'Pick one high-value task, collect real examples and define what "done well" means.' },
+      { step: 2, title: 'Prototype', description: 'A working agent on your data in two to three weeks, measured against the test set.' },
+      { step: 3, title: 'Harden', description: 'Guardrails, approvals, permissions, monitoring and load testing.' },
+      { step: 4, title: 'Operate', description: 'Launch, watch the metrics, and keep improving with new evaluation cases.' },
+    ],
+    faqs: [
       {
-        step: 1,
-        title: 'Assess',
-        description:
-          'Comprehensive audit of your current infrastructure, security posture, and operational workflows',
+        question: 'What is the difference between an AI agent and a chatbot?',
+        answer:
+          'A chatbot answers questions. An agent takes actions: it calls tools and APIs, works through several steps, and finishes a task such as updating a record or drafting a reply for approval.',
       },
       {
-        step: 2,
-        title: 'Design',
-        description:
-          'Architecture blueprint optimized for your specific scale, compliance, and performance requirements',
+        question: 'Which AI models do you use?',
+        answer:
+          'We are model-agnostic. We pick from current frontier and open-weight models based on accuracy on your test set, cost, latency and data-residency needs, and we can route between them.',
       },
       {
-        step: 3,
-        title: 'Implement',
-        description:
-          'Phased rollout with zero-downtime migration and automated testing at every stage',
+        question: 'How do you keep agents safe when they can act on our systems?',
+        answer:
+          'Scoped permissions, human approval for sensitive actions, input and output guardrails, full audit logs, and an evaluation suite that runs before every release.',
       },
       {
-        step: 4,
-        title: 'Operate',
-        description:
-          'Ongoing management, monitoring, and continuous optimization with transparent reporting',
+        question: 'How long does a first agent take?',
+        answer: 'A focused first agent usually reaches a measured pilot in four to eight weeks.',
       },
     ],
-    relatedSlugs: ['devops-management', 'architecture-design', 'ai-driven-development'],
+    relatedSlugs: ['ai-driven-development', 'ai-automation', 'whatsapp-business-integration'],
     meta: {
-      title: 'IT Services | Invigosol',
+      title: 'AI Agent Development Company | InvigoSol',
       description:
-        'Enterprise IT services including cloud infrastructure, system integration, security management, and 24/7 technical operations — built for reliability at scale.',
+        'Custom AI agents and multi-agent workflows with MCP tool integrations, evaluations, guardrails and human approval. From pilot to production in weeks.',
     },
   },
   {
     slug: 'ai-driven-development',
-    title: 'AI-Driven Development',
-    tagline: 'Software that thinks. Products that learn. Intelligence at the core, not the edge.',
+    title: 'Generative AI & LLM Development',
+    shortTitle: 'Generative AI & LLM Apps',
+    tagline: 'LLM features your users trust: grounded in your data, measured, and cheap enough to run at scale.',
     description:
-      'Intelligent software solutions that embed AI into your core product — not as a feature, but as the foundation.',
+      'RAG systems, AI copilots and LLM-powered product features, built on your data and shipped with evaluation and monitoring.',
     longDescription:
-      "AI isn't a feature — it's a foundation. Invigosol builds software where intelligence is embedded into the product's DNA, not sprinkled on top as an afterthought. From LLM-powered interfaces to predictive analytics engines to autonomous decision systems — we deliver AI that works in production, at scale, with guardrails.",
-    icon: 'Brain',
+      'Adding an LLM to a product is easy. Making its answers accurate, safe and affordable is the real work. We build retrieval-augmented generation (RAG) over your documents and databases, AI copilots inside your apps, document and data extraction, and fine-tuned or distilled models when an off-the-shelf model is not enough.',
+    icon: 'Sparkles',
     challenges: [
-      'AI proofs-of-concept that never make it to production',
-      'Models that perform in notebooks but fail under real-world data conditions',
-      'Lack of in-house ML/AI expertise to build and maintain intelligent systems',
-      "AI implementations that don't connect to measurable business outcomes",
+      'Answers that sound right but are wrong (hallucinations)',
+      'Proofs of concept that never reach production',
+      'Sensitive data that cannot leave your environment',
+      'Token costs that make the feature unprofitable',
     ],
     features: [
       {
-        title: 'LLM Integration & Fine-Tuning',
+        title: 'RAG and enterprise search',
         description:
-          'Integrate large language models into your product with retrieval-augmented generation (RAG), fine-tuning, and prompt engineering optimized for your domain. We build LLM systems that are accurate, fast, and cost-efficient.',
+          'Hybrid search, re-ranking and citations over your documents, wikis, tickets and databases, with access control respected per user.',
       },
       {
-        title: 'Predictive Analytics & ML Pipelines',
+        title: 'AI copilots in your product',
         description:
-          'End-to-end machine learning pipelines — from data ingestion and feature engineering to model training, evaluation, and deployment. Automated retraining ensures your models stay accurate as data evolves.',
+          'Assistants that draft, summarise, explain and fill forms inside your web or mobile app, with streaming UI and feedback capture.',
       },
       {
-        title: 'Intelligent Automation',
+        title: 'Document and data extraction',
         description:
-          'Automate complex business processes using AI-driven decision engines. From document processing to workflow orchestration — we build systems that handle edge cases, not just the happy path.',
+          'Turn invoices, contracts, forms and emails into structured data with confidence scores and a review queue for edge cases.',
       },
       {
-        title: 'AI-Native Product Design',
+        title: 'Fine-tuning and small models',
         description:
-          'We rethink product experiences through an AI lens. Not "add a chatbot" — rather, "how does embedded intelligence fundamentally change what this product can do for users?"',
+          'Fine-tuned, distilled or open-weight models for narrow tasks where speed, cost or privacy matter more than generality.',
       },
       {
-        title: 'Production AI Infrastructure',
+        title: 'Private and on-prem deployment',
         description:
-          'Model serving, A/B testing, observability, cost management, and guardrails. We build the infrastructure that keeps your AI systems reliable, observable, and compliant in production.',
+          'Deploy on your cloud account or on-prem with no training on your data, for regulated industries and strict data-residency needs.',
+      },
+      {
+        title: 'LLM evaluation and monitoring',
+        description:
+          'Offline test sets, online quality scoring, drift alerts and cost dashboards so quality never silently drops.',
       },
     ],
     processSteps: [
+      { step: 1, title: 'Scope', description: 'Pick the use case, collect sample questions and agree on quality metrics.' },
+      { step: 2, title: 'Build', description: 'Data pipeline, retrieval, prompts and UI, measured against the test set.' },
+      { step: 3, title: 'Validate', description: 'Red-teaming, security review and a pilot with real users.' },
+      { step: 4, title: 'Scale', description: 'Production rollout with monitoring, caching and cost optimisation.' },
+    ],
+    faqs: [
       {
-        step: 1,
-        title: 'Discover',
-        description:
-          'Identify the highest-impact AI opportunities aligned with your business goals',
+        question: 'What is RAG and do we need it?',
+        answer:
+          'Retrieval-augmented generation lets a model answer from your own documents and data instead of its general training. You need it whenever answers must be specific to your business and up to date.',
       },
       {
-        step: 2,
-        title: 'Prototype',
-        description:
-          'Rapid proof of value with real data to validate feasibility and ROI',
+        question: 'Will our data be used to train public models?',
+        answer:
+          'No. We use enterprise API terms that exclude training on your data, or private and open-weight models deployed in your own environment.',
       },
       {
-        step: 3,
-        title: 'Build',
-        description:
-          'Production-grade development with testing, monitoring, and safety guardrails',
-      },
-      {
-        step: 4,
-        title: 'Scale',
-        description:
-          'Performance optimization, cost management, and continuous model improvement',
+        question: 'How do you reduce hallucinations?',
+        answer:
+          'Grounding in retrieved sources, citations, structured outputs, refusal when evidence is missing, and an evaluation set that catches regressions before release.',
       },
     ],
-    relatedSlugs: ['agent-development', 'architecture-design', 'product-management'],
+    relatedSlugs: ['agent-development', 'ai-automation', 'architecture-design'],
     meta: {
-      title: 'AI-Driven Development | Invigosol',
+      title: 'Generative AI & LLM Development Services | InvigoSol',
       description:
-        'Build AI-native software products with embedded intelligence — from LLM integration and ML pipelines to production AI systems that deliver measurable business impact.',
+        'RAG, AI copilots, document extraction and fine-tuned LLMs built on your data, with evaluations, private deployment and cost control. Production-ready GenAI.',
+    },
+  },
+  {
+    slug: 'ai-automation',
+    title: 'AI Business Process Automation',
+    shortTitle: 'AI Process Automation',
+    tagline: 'Take the copy-paste out of operations. Keep people for the decisions.',
+    description:
+      'Automate back-office work across email, WhatsApp, spreadsheets, CRM and ERP with AI workflows and clear human approval steps.',
+    longDescription:
+      'Most operations teams still spend hours moving information between inboxes, spreadsheets and business systems. We automate those flows with a mix of workflow tools, integrations and AI steps that read, classify and draft, and we keep a person in charge of anything that matters. You get faster turnaround, fewer errors and a full log of what ran.',
+    icon: 'Workflow',
+    challenges: [
+      'Staff time lost to manual data entry and copy-paste between systems',
+      'Leads and customer requests that slip through busy inboxes',
+      'Old RPA bots that break whenever a screen changes',
+      'No visibility into which tasks are done, stuck or late',
+    ],
+    features: [
+      {
+        title: 'Process discovery',
+        description: 'We map the current process, measure the time it takes and rank automation candidates by return.',
+      },
+      {
+        title: 'AI inbox and lead triage',
+        description:
+          'Classify, route and draft replies for email and WhatsApp messages; flag hot leads and complaints for a person.',
+      },
+      {
+        title: 'Integration workflows',
+        description:
+          'Reliable flows between CRM, ERP, accounting, e-commerce and spreadsheets using APIs and workflow tools such as n8n or Make, or custom code.',
+      },
+      {
+        title: 'Document processing',
+        description: 'Invoices, orders, CVs and forms read automatically and posted to the right system after validation.',
+      },
+      {
+        title: 'Reports and alerts',
+        description: 'Daily summaries and exception alerts delivered to email, Slack or WhatsApp.',
+      },
+    ],
+    processSteps: [
+      { step: 1, title: 'Map', description: 'Document the process and pick the first two or three automations.' },
+      { step: 2, title: 'Automate', description: 'Build the flows with approval steps and error handling.' },
+      { step: 3, title: 'Pilot', description: 'Run side by side with the team and measure time saved.' },
+      { step: 4, title: 'Expand', description: 'Roll out and add the next processes.' },
+    ],
+    faqs: [
+      {
+        question: 'Is AI automation different from RPA?',
+        answer:
+          'Yes. RPA copies clicks on a screen and breaks when the screen changes. AI automation works through APIs and understands unstructured text such as emails, chats and documents.',
+      },
+      {
+        question: 'Do we have to replace our current software?',
+        answer: 'No. We connect the tools you already use.',
+      },
+    ],
+    relatedSlugs: ['agent-development', 'whatsapp-business-integration', 'ai-driven-development'],
+    meta: {
+      title: 'AI Business Process Automation Services | InvigoSol',
+      description:
+        'Automate back-office work across email, WhatsApp, CRM, ERP and spreadsheets with AI workflows and human approval. Less manual work, fewer errors.',
+    },
+  },
+  {
+    slug: 'whatsapp-business-integration',
+    title: 'WhatsApp Business API & Meta Integration',
+    shortTitle: 'WhatsApp Business API',
+    tagline: 'Official WhatsApp Cloud API integrations for sales, support and notifications.',
+    description:
+      'WhatsApp Cloud API setup, Embedded Signup, CRM integration, chat automation and AI agents on the official Meta platform.',
+    longDescription:
+      'WhatsApp is where customers in Pakistan, the Gulf and many other markets expect to talk to a business. We build on the official WhatsApp Business Platform (Cloud API): onboarding your numbers, message templates, webhooks, CRM and helpdesk integration, chat automation and AI agents that hand over to your team. As a Meta Tech Provider in progress, InvigoSol also builds multi-tenant WhatsApp products for software companies.',
+    icon: 'MessageCircle',
+    challenges: [
+      'Customer chats spread across personal phones with no oversight',
+      'Unofficial tools that put the business number at risk of being banned',
+      'No link between WhatsApp conversations and the CRM',
+      'Template rejections and confusion about the 24-hour messaging window',
+    ],
+    features: [
+      {
+        title: 'Cloud API onboarding',
+        description:
+          'Business portfolio, WhatsApp Business Account and phone number setup, display name approval and webhook configuration.',
+      },
+      {
+        title: 'Embedded Signup for SaaS',
+        description:
+          'Let your own customers connect their WhatsApp numbers to your product in a few clicks through Facebook Login for Business.',
+      },
+      {
+        title: 'Templates and campaigns',
+        description:
+          'Utility, authentication and marketing templates designed to pass review, with opt-in capture and opt-out handling.',
+      },
+      {
+        title: 'CRM and helpdesk integration',
+        description: 'Two-way sync with your CRM, helpdesk or order system so every conversation is linked to a customer record.',
+      },
+      {
+        title: 'Chat automation and AI agents',
+        description:
+          'Order status, booking, FAQs and lead qualification handled automatically, with a clean hand-over to a person.',
+      },
+      {
+        title: 'Monitoring and quality',
+        description:
+          'Response-time tracking, quality rating alerts and conversation analytics. See BizAgent, our own product built on this stack.',
+      },
+    ],
+    processSteps: [
+      { step: 1, title: 'Plan', description: 'Use cases, message types, templates and integrations.' },
+      { step: 2, title: 'Connect', description: 'Number onboarding, webhooks and templates submitted for approval.' },
+      { step: 3, title: 'Build', description: 'Integrations, automation flows and agent hand-over.' },
+      { step: 4, title: 'Launch', description: 'Go live, monitor quality rating and response times.' },
+    ],
+    faqs: [
+      {
+        question: 'What is the WhatsApp Cloud API?',
+        answer:
+          "It is Meta's official, hosted API for the WhatsApp Business Platform. It lets software send and receive WhatsApp messages for a business number in line with WhatsApp's policies.",
+      },
+      {
+        question: 'Can we keep using the WhatsApp Business app on the same number?',
+        answer:
+          'In many cases yes. Meta supports coexistence, so a number can use the Business app and the Cloud API together. We check eligibility for your number during planning.',
+      },
+      {
+        question: 'How are WhatsApp messages charged?',
+        answer:
+          'Meta charges per template message delivered, at a rate that depends on the category and the country. Replies inside the 24-hour customer service window are free. We help you design flows that keep costs low.',
+      },
+    ],
+    relatedSlugs: ['ai-automation', 'agent-development', 'product-management'],
+    meta: {
+      title: 'WhatsApp Business API Integration | Cloud API | InvigoSol',
+      description:
+        'Official WhatsApp Cloud API integration: number onboarding, Embedded Signup, templates, CRM sync, chat automation and AI agents for sales and support.',
     },
   },
   {
     slug: 'product-management',
-    title: 'Product Management & Maintenance',
-    tagline: 'From roadmap to reality. From launch to long-term evolution.',
+    title: 'SaaS & Product Engineering',
+    shortTitle: 'SaaS & Product Engineering',
+    tagline: 'From MVP to a product that scales, with one team that owns the outcome.',
     description:
-      'End-to-end product ownership — from roadmap to release, from launch to long-term evolution.',
+      'Product strategy, UX, full-stack web and mobile engineering and long-term maintenance for SaaS and digital products.',
     longDescription:
-      "Great products aren't just built — they're stewarded. Invigosol provides end-to-end product management and maintenance, combining strategic thinking with engineering execution. We own your product's lifecycle from discovery through growth — ensuring every feature shipped solves a real problem and every release reaches users without disruption.",
-    icon: 'Package',
+      'We take products from idea to market and keep them healthy afterwards. One team covers discovery, UX, web and mobile development, AI features, releases and maintenance. We build with modern, well-supported stacks (TypeScript, React and Next.js, Astro, Node.js, Python, Flutter and React Native) and we use AI-assisted engineering to ship faster without cutting quality.',
+    icon: 'Rocket',
     challenges: [
-      "Products that ship features but don't move metrics",
-      'Disconnected product and engineering teams with conflicting priorities',
-      'Accumulating tech debt that slows every subsequent release',
-      'No structured process for prioritization, measurement, and iteration',
+      'Roadmaps driven by opinions rather than evidence',
+      'MVPs that cannot grow into a real product',
+      'Mounting technical debt that slows every release',
+      'No dedicated team to maintain the product after launch',
     ],
     features: [
       {
-        title: 'Product Strategy & Roadmapping',
-        description:
-          'Data-driven roadmap development that balances user needs, business goals, and technical feasibility. We use outcome-based planning — every initiative maps to a measurable result.',
+        title: 'Product discovery and MVP',
+        description: 'Problem validation, prototypes and a focused MVP that tests the riskiest assumptions first.',
       },
       {
-        title: 'Discovery & Validation',
-        description:
-          'User research, competitive analysis, and rapid prototyping to validate ideas before committing engineering resources. We kill bad ideas fast and double down on winners.',
+        title: 'Full-stack web and mobile',
+        description: 'Fast, accessible web apps and cross-platform mobile apps with clean APIs and automated tests.',
       },
       {
-        title: 'Development Execution',
-        description:
-          'Agile delivery with sprint planning, backlog management, and cross-functional coordination. We integrate seamlessly with your existing team or operate as a standalone product squad.',
+        title: 'Multi-tenant SaaS foundations',
+        description: 'Auth, roles, billing, tenant isolation, audit logs and admin tools done right from the start.',
       },
       {
-        title: 'Launch & Growth',
-        description:
-          "Release management, feature flagging, A/B testing, and analytics-driven iteration. We don't just ship — we measure, learn, and optimize.",
+        title: 'AI features in your product',
+        description: 'Copilots, smart search, summaries and automation added where they improve the product.',
       },
       {
-        title: 'Ongoing Maintenance & Evolution',
-        description:
-          'Performance monitoring, bug triage, dependency updates, security patches, and incremental improvements. Your product stays healthy, modern, and competitive long after launch.',
+        title: 'Maintenance and support',
+        description: 'Security updates, dependency upgrades, bug fixes and performance work on a predictable monthly plan.',
       },
     ],
     processSteps: [
+      { step: 1, title: 'Discover', description: 'Users, problems, metrics and a prioritised roadmap.' },
+      { step: 2, title: 'Design', description: 'UX flows, prototypes and the technical plan.' },
+      { step: 3, title: 'Build', description: 'Two-week sprints with working software in every demo.' },
+      { step: 4, title: 'Grow', description: 'Launch, measure, iterate and maintain.' },
+    ],
+    faqs: [
       {
-        step: 1,
-        title: 'Understand',
-        description:
-          'Deep dive into your business, users, market, and existing product landscape',
+        question: 'Can you take over an existing product?',
+        answer:
+          'Yes. We start with a code and architecture review, stabilise the release process and then continue development or maintenance.',
       },
       {
-        step: 2,
-        title: 'Strategize',
-        description:
-          'Define product vision, success metrics, and a prioritized roadmap',
-      },
-      {
-        step: 3,
-        title: 'Execute',
-        description:
-          'Iterative development with continuous user feedback and measurement',
-      },
-      {
-        step: 4,
-        title: 'Evolve',
-        description:
-          'Ongoing optimization, maintenance, and strategic evolution as the market shifts',
+        question: 'How do you price product development?',
+        answer: 'Fixed-scope phases for MVPs, and a monthly team or retainer for ongoing development and maintenance.',
       },
     ],
-    relatedSlugs: ['ai-driven-development', 'architecture-design', 'devops-management'],
+    relatedSlugs: ['architecture-design', 'devops-management', 'ai-driven-development'],
     meta: {
-      title: 'Product Management & Maintenance | Invigosol',
+      title: 'SaaS & Product Engineering Services | InvigoSol',
       description:
-        'Full-lifecycle product management — from strategy and roadmap to development, launch, and ongoing maintenance. We own the outcome, not just the backlog.',
+        'Product discovery, MVP development, full-stack web and mobile engineering, multi-tenant SaaS and long-term maintenance from one accountable team.',
     },
   },
   {
     slug: 'devops-management',
-    title: 'DevOps Management',
-    tagline: 'Ship with confidence. Deploy without drama. Observe everything.',
+    title: 'DevOps, Cloud & MLOps',
+    shortTitle: 'DevOps, Cloud & MLOps',
+    tagline: 'Ship daily, sleep at night, and know exactly what the cloud bill pays for.',
     description:
-      'Automated pipelines, infrastructure as code, and observability — so your team ships with confidence, every time.',
+      'CI/CD, infrastructure as code, Kubernetes, observability, FinOps and MLOps/LLMOps for teams running AI in production.',
     longDescription:
-      "Speed without stability is chaos. Stability without speed is stagnation. Invigosol's DevOps practice delivers both — automated pipelines, infrastructure as code, comprehensive observability, and a culture of continuous improvement. We transform your delivery capability so your team ships faster, safer, and more frequently.",
+      'We build platforms that make releases routine: automated pipelines, infrastructure as code, container platforms and observability that shows problems before customers do. For AI workloads we add MLOps and LLMOps: model and prompt versioning, evaluation gates, GPU and inference cost control, and tracing for every model call.',
     icon: 'GitBranch',
     challenges: [
-      'Slow, manual deployment processes that bottleneck engineering output',
-      '"Works on my machine" gaps between development and production environments',
-      "Infrastructure that's manually configured, undocumented, and fragile",
-      'Lack of visibility into system health, performance, and cost',
+      'Manual, risky deployments that slow the team down',
+      'Cloud bills that grow without anyone knowing why',
+      'Outages discovered by customers instead of alerts',
+      'AI models and prompts released with no versioning or rollback',
     ],
     features: [
       {
-        title: 'CI/CD Pipeline Engineering',
-        description:
-          'Automated build, test, and deployment pipelines tailored to your stack. From commit to production in minutes — with automated quality gates, security scanning, and rollback capabilities.',
+        title: 'CI/CD pipelines',
+        description: 'Automated build, test, security scan and deploy with preview environments and one-click rollback.',
       },
       {
-        title: 'Infrastructure as Code (IaC)',
-        description:
-          'Your entire infrastructure defined in version-controlled code — Terraform, Pulumi, or CloudFormation. Reproducible, auditable, and drift-free environments across dev, staging, and production.',
+        title: 'Infrastructure as code',
+        description: 'Terraform or OpenTofu and GitOps for AWS, Azure, GCP and smaller clouds; every change reviewed and repeatable.',
       },
       {
-        title: 'Container Orchestration',
-        description:
-          "Kubernetes and container platform management — from cluster architecture to auto-scaling policies to cost optimization. We run production Kubernetes so your team doesn't have to become Kubernetes experts.",
+        title: 'Kubernetes and containers',
+        description: 'Right-sized container platforms, or simpler serverless options when Kubernetes is more than you need.',
       },
       {
-        title: 'Observability & Monitoring',
-        description:
-          'Full-stack observability with metrics, logs, traces, and alerting. We implement monitoring that answers "what\'s broken and why?" — not just "something is broken."',
+        title: 'Observability and SRE',
+        description: 'OpenTelemetry tracing, metrics, logs, SLOs and on-call runbooks.',
       },
       {
-        title: 'Platform Engineering',
-        description:
-          'Internal developer platforms that abstract infrastructure complexity. Self-service environments, automated provisioning, and golden paths — so developers ship features, not YAML.',
+        title: 'FinOps and cost optimisation',
+        description: 'Cost allocation by team and feature, rightsizing, reserved capacity and inference cost tuning.',
+      },
+      {
+        title: 'MLOps and LLMOps',
+        description: 'Model and prompt registries, evaluation gates in CI, inference serving and LLM tracing.',
       },
     ],
     processSteps: [
+      { step: 1, title: 'Audit', description: 'Review pipelines, infrastructure, costs and incidents.' },
+      { step: 2, title: 'Plan', description: 'Target platform and a phased roadmap with quick wins first.' },
+      { step: 3, title: 'Automate', description: 'Pipelines, IaC and observability rolled out service by service.' },
+      { step: 4, title: 'Run', description: 'Ongoing operations, cost reviews and improvements.' },
+    ],
+    faqs: [
       {
-        step: 1,
-        title: 'Audit',
-        description:
-          'Assess your current delivery pipeline, infrastructure, and operational maturity',
+        question: 'What is LLMOps?',
+        answer:
+          'LLMOps applies DevOps practices to LLM applications: versioning prompts and models, running evaluations before release, tracing every call and controlling inference cost.',
       },
       {
-        step: 2,
-        title: 'Design',
-        description:
-          'Blueprint for your target DevOps architecture and toolchain',
-      },
-      {
-        step: 3,
-        title: 'Automate',
-        description:
-          'Implement pipelines, IaC, monitoring, and platform capabilities',
-      },
-      {
-        step: 4,
-        title: 'Optimize',
-        description:
-          'Continuous improvement of deployment frequency, lead time, change failure rate, and recovery time',
+        question: 'Can you reduce our cloud costs?',
+        answer:
+          'We start with a cost audit that shows where the money goes, then rightsize, remove waste and tune architecture. Savings depend on your setup, and we report them openly.',
       },
     ],
     relatedSlugs: ['it-services', 'architecture-design', 'ai-driven-development'],
     meta: {
-      title: 'DevOps Management | Invigosol',
+      title: 'DevOps, Cloud & MLOps Services | InvigoSol',
       description:
-        'DevOps engineering and management — CI/CD pipelines, infrastructure as code, cloud automation, and observability. Ship faster with confidence.',
+        'CI/CD, infrastructure as code, Kubernetes, observability, FinOps and MLOps/LLMOps. Faster releases, fewer incidents and a cloud bill you understand.',
     },
   },
   {
     slug: 'architecture-design',
-    title: 'Architecture Design',
-    tagline: "Blueprints built for today's traffic and tomorrow's ambition.",
+    title: 'Software Architecture & AI Readiness',
+    shortTitle: 'Architecture & AI Readiness',
+    tagline: 'Make the big technical decisions once, and make them well.',
     description:
-      "Scalable, resilient system blueprints — designed for today's load and tomorrow's growth.",
+      'Architecture reviews, cloud-native and event-driven design, legacy modernisation and AI readiness assessments.',
     longDescription:
-      "Architecture is the decisions you'll live with for years. Get it right, and your system scales gracefully, adapts to new requirements, and enables your team to move fast. Get it wrong, and every feature takes longer, every scale event is a crisis, and every new requirement feels impossible. Invigosol designs systems that are resilient, scalable, and ready for what's next — including AI.",
+      'Good architecture lets a product grow without constant rewrites. We review existing systems, design new ones and plan modernisation step by step. Our AI readiness assessment looks at your data, systems, security and team, and gives you a ranked list of AI use cases with a realistic plan to deliver them.',
     icon: 'Building2',
     challenges: [
-      "Monolithic systems that can't scale or evolve independently",
-      'Architecture that forces full redeployment for every small change',
-      'Systems designed for current load that collapse under 5x growth',
-      'No clear technical strategy for integrating AI into existing platforms',
+      'Systems that cannot scale without a costly rewrite',
+      'Legacy platforms that block new features and AI adoption',
+      'Data spread across silos with no clear owner',
+      'Unclear where AI would actually pay off',
     ],
     features: [
       {
-        title: 'System Architecture & Design',
-        description:
-          "End-to-end architecture design from requirements through detailed technical specifications. We produce architecture decision records, component diagrams, data flow models, and implementation guides — not just whiteboard sketches.",
+        title: 'Architecture review',
+        description: 'A written assessment of scalability, reliability, security and cost, with prioritised recommendations.',
       },
       {
-        title: 'Microservices & Domain-Driven Design',
-        description:
-          'Decompose complex systems into well-bounded, independently deployable services. We use domain-driven design to ensure service boundaries match business reality — not arbitrary technical splits.',
+        title: 'Cloud-native and event-driven design',
+        description: 'Modular services, event streams and APIs designed for the scale you actually expect.',
       },
       {
-        title: 'Event-Driven Architecture',
-        description:
-          'Design reactive, loosely-coupled systems using event streaming (Kafka, EventBridge) and CQRS patterns. Ideal for real-time data processing, workflow automation, and multi-system coordination.',
+        title: 'Legacy modernisation',
+        description: 'Step-by-step migration that keeps the business running, using patterns such as the strangler fig.',
       },
       {
-        title: 'Cloud-Native Platform Design',
-        description:
-          'Architecture optimized for cloud — leveraging managed services, serverless compute, and auto-scaling. We design for elasticity, cost-efficiency, and multi-region availability.',
+        title: 'AI readiness assessment',
+        description: 'Data, systems, governance and skills review with ranked AI use cases and a delivery roadmap.',
       },
       {
-        title: 'AI-Ready Architecture',
-        description:
-          'Systems designed with AI integration as a first-class concern — vector databases, model serving infrastructure, feature stores, and data pipelines that feed intelligent components.',
+        title: 'Security and compliance by design',
+        description: 'Threat modelling, least-privilege access and data protection built into the design.',
       },
     ],
     processSteps: [
+      { step: 1, title: 'Understand', description: 'Business goals, constraints and the current landscape.' },
+      { step: 2, title: 'Assess', description: 'Interviews, code and infrastructure review.' },
+      { step: 3, title: 'Design', description: 'Target architecture, decision records and a roadmap.' },
+      { step: 4, title: 'Guide', description: 'Support your team through delivery.' },
+    ],
+    faqs: [
       {
-        step: 1,
-        title: 'Discover',
-        description:
-          'Understand your business domain, scale requirements, team capabilities, and constraints',
+        question: 'What do we get from an AI readiness assessment?',
+        answer:
+          'A short report covering data quality, systems, security and skills, a ranked list of AI use cases with expected value and effort, and a 90-day plan.',
       },
       {
-        step: 2,
-        title: 'Design',
-        description:
-          'Create detailed architecture blueprints with trade-off analysis and decision records',
-      },
-      {
-        step: 3,
-        title: 'Validate',
-        description:
-          'Load testing, security review, and architectural spike implementations to prove the design',
-      },
-      {
-        step: 4,
-        title: 'Guide',
-        description:
-          'Hands-on support during implementation to ensure the architecture is executed as designed',
+        question: 'How long does an architecture review take?',
+        answer: 'Typically two to four weeks, depending on the size of the system.',
       },
     ],
-    relatedSlugs: ['ai-driven-development', 'devops-management', 'it-services'],
+    relatedSlugs: ['devops-management', 'product-management', 'ai-driven-development'],
     meta: {
-      title: 'Architecture Design | Invigosol',
+      title: 'Software Architecture & AI Readiness Assessment | InvigoSol',
       description:
-        'Scalable system architecture and technical design — microservices, event-driven systems, cloud-native platforms, and AI-ready infrastructure.',
+        'Architecture reviews, cloud-native design, legacy modernisation and AI readiness assessments with a ranked use-case roadmap.',
     },
   },
   {
-    slug: 'agent-development',
-    title: 'Agent Development',
-    tagline: 'Autonomous agents that execute, coordinate, and deliver — powered by OpenClaw.',
+    slug: 'it-services',
+    title: 'Managed IT, Cloud & Cybersecurity',
+    shortTitle: 'Managed IT & Security',
+    tagline: 'Reliable, secure IT for growing businesses, with one team to call.',
     description:
-      'Autonomous AI agents that execute complex workflows — powered by OpenClaw, our agent development platform.',
+      'Managed cloud and Microsoft 365 or Google Workspace, security hardening, backups, monitoring and IT support.',
     longDescription:
-      "The next wave of AI isn't chatbots — it's agents. Autonomous systems that reason, plan, use tools, and execute complex workflows without constant human supervision. Invigosol is at the forefront of agentic AI, building production-grade agent systems with OpenClaw — our framework for developing, orchestrating, and deploying AI agents that actually work in the real world, with the guardrails enterprises require.",
-    icon: 'Bot',
+      'Growing businesses need IT that just works and stays secure. We manage cloud infrastructure, workspace tools, devices and access, and we harden your security against the threats that matter today: phishing, account takeover and ransomware. Clear monthly reporting shows what we did and what is at risk.',
+    icon: 'ShieldCheck',
     challenges: [
-      'AI agents that work in demos but fail in production edge cases',
-      'No framework for coordinating multiple agents on complex workflows',
-      'Lack of observability and control over autonomous AI actions',
-      'Enterprise security and compliance concerns with agentic systems',
+      'No one owns IT, so issues wait until something breaks',
+      'Weak passwords, no MFA and shared accounts',
+      'Backups that have never been tested',
+      'Security questionnaires from customers you cannot answer',
     ],
     features: [
       {
-        title: 'Custom Agent Development',
-        description:
-          'Purpose-built AI agents designed for your specific business workflows — customer support automation, data pipeline orchestration, code generation, document processing, and more. Every agent is built for your domain, not generic.',
+        title: 'Managed cloud',
+        description: 'Day-to-day management of AWS, Azure, GCP and VPS environments with patching and monitoring.',
       },
       {
-        title: 'Multi-Agent Orchestration',
-        description:
-          "Complex problems need multiple specialized agents working together. We design multi-agent systems with coordination protocols, shared context management, and conflict resolution — so agents collaborate, not compete.",
+        title: 'Workspace and identity',
+        description: 'Google Workspace or Microsoft 365, single sign-on, MFA and least-privilege access.',
       },
       {
-        title: 'Tool Integration & Function Calling',
-        description:
-          'Agents that can interact with your existing systems — APIs, databases, SaaS tools, internal platforms. We build robust tool-use frameworks with error handling, retry logic, and permission controls.',
+        title: 'Security hardening',
+        description: 'Vulnerability scanning, email security, endpoint protection and security awareness for staff.',
       },
       {
-        title: 'Production Guardrails & Safety',
-        description:
-          "Enterprise-grade safety layers — output validation, action approval workflows, rate limiting, audit logging, and human-in-the-loop escalation. Autonomous doesn't mean unsupervised.",
+        title: 'Backup and recovery',
+        description: 'Automated, encrypted backups with regular restore tests and a written recovery plan.',
       },
       {
-        title: 'OpenClaw Platform',
-        description:
-          'Our open framework for agent development. OpenClaw provides the building blocks — agent runtime, orchestration engine, tool registry, observability dashboard, and evaluation suite — so you can build, test, and deploy agents at production quality.',
+        title: 'Compliance support',
+        description: 'Policies and evidence for customer security reviews and frameworks such as ISO 27001, SOC 2 and GDPR.',
       },
     ],
     processSteps: [
+      { step: 1, title: 'Assess', description: 'Inventory of systems, accounts and current risks.' },
+      { step: 2, title: 'Fix', description: 'Close the most important security gaps first.' },
+      { step: 3, title: 'Manage', description: 'Ongoing monitoring, updates and support.' },
+      { step: 4, title: 'Report', description: 'Monthly report on health, risks and next steps.' },
+    ],
+    faqs: [
       {
-        step: 1,
-        title: 'Identify',
-        description:
-          'Map your highest-value automation opportunities and define agent capabilities',
+        question: 'Do you offer support for small businesses?',
+        answer: 'Yes. Our managed plans are sized for small and mid-sized teams, with a fixed monthly fee.',
       },
       {
-        step: 2,
-        title: 'Design',
-        description:
-          'Architect agent systems with clear boundaries, tool access, and safety constraints',
-      },
-      {
-        step: 3,
-        title: 'Build',
-        description:
-          'Develop and rigorously test agents with real-world scenarios, edge cases, and adversarial inputs',
-      },
-      {
-        step: 4,
-        title: 'Deploy',
-        description:
-          'Production rollout with monitoring, guardrails, and continuous evaluation',
+        question: 'Can you help us answer customer security questionnaires?',
+        answer: 'Yes. We put the right controls in place and prepare the policies and evidence reviewers ask for.',
       },
     ],
-    relatedSlugs: ['ai-driven-development', 'architecture-design', 'product-management'],
+    relatedSlugs: ['devops-management', 'architecture-design', 'ai-automation'],
     meta: {
-      title: 'Agent Development — OpenClaw | Invigosol',
+      title: 'Managed IT, Cloud & Cybersecurity Services | InvigoSol',
       description:
-        'Build autonomous AI agents with OpenClaw — multi-agent orchestration, tool integration, and production-grade guardrails for enterprise agentic AI systems.',
+        'Managed cloud, Google Workspace and Microsoft 365, security hardening, backups and compliance support for growing businesses, with clear monthly reporting.',
     },
   },
 ];
-
-export function getServiceBySlug(slug: string): Service | undefined {
-  return services.find((s) => s.slug === slug);
-}
-
-export function getAllSlugs(): string[] {
-  return services.map((s) => s.slug);
-}

@@ -1,34 +1,64 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/shared/Container.astro';
-import Breadcrumbs from '../../components/shared/Breadcrumbs.astro';
+import PageHero from '../../components/shared/PageHero.astro';
+import SectionHeading from '../../components/shared/SectionHeading.astro';
 import ServiceCard from '../../components/services/ServiceCard.astro';
+import CTASection from '../../components/home/CTASection.astro';
 import { services } from '../../data/services';
+import { company } from '../../data/company';
+
+const aiSlugs = ['agent-development', 'ai-driven-development', 'ai-automation', 'whatsapp-business-integration'];
+const groups = [
+  {
+    title: 'AI & automation',
+    subtitle: 'Put AI to work on real tasks, safely and measurably.',
+    items: services.filter((s) => aiSlugs.includes(s.slug)),
+  },
+  {
+    title: 'Engineering & cloud',
+    subtitle: 'The products, platforms and security that AI runs on.',
+    items: services.filter((s) => !aiSlugs.includes(s.slug)),
+  },
+];
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${company.siteUrl}/services/${s.slug}`,
+    name: s.title,
+  })),
+};
 ---
 
 <BaseLayout
-  title="Our Services | Invigosol"
-  description="Six core technology capabilities — IT services, AI development, product management, DevOps, architecture design, and AI agent development — delivered as one integrated approach."
+  title="AI, Automation & Software Engineering Services | InvigoSol"
+  description="AI agent development, generative AI and LLM apps, AI automation, WhatsApp Business API, SaaS engineering, DevOps and MLOps, architecture and managed IT."
   canonicalPath="/services"
+  jsonLd={[itemListJsonLd]}
 >
-  <section class="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-16 sm:py-20">
-    <Container>
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">Our Services</h1>
-      <p class="mt-4 text-lg sm:text-xl text-primary-100 max-w-3xl">
-        Six capabilities. One integrated approach. We bring together AI, engineering, and product
-        thinking to deliver technology that works — in production, at scale, under pressure.
-      </p>
-    </Container>
-  </section>
+  <PageHero
+    eyebrow="Services"
+    title="AI and engineering services, delivered end to end"
+    subtitle="Eight services, one accountable team. Start with a single use case or hand us the whole roadmap."
+    breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
+  />
 
-  <section class="py-16 sm:py-20">
-    <Container>
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((service) => (
-          <ServiceCard service={service} />
-        ))}
-      </div>
-    </Container>
-  </section>
+  {groups.map((group, i) => (
+    <section class:list={['py-20 sm:py-24', i % 2 === 1 && 'bg-neutral-50']}>
+      <Container>
+        <SectionHeading title={group.title} subtitle={group.subtitle} align="left" />
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {group.items.map((service) => (
+            <ServiceCard service={service} />
+          ))}
+        </div>
+      </Container>
+    </section>
+  ))}
+
+  <CTASection />
 </BaseLayout>

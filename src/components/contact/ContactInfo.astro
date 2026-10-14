@@ -1,37 +1,45 @@
 ---
 import { company } from '../../data/company';
-import { Mail, Phone, MapPin, ExternalLink } from '@lucide/astro';
+import { Mail, Phone, MapPin, ExternalLink, Clock } from '@lucide/astro';
 ---
 
-<div class="bg-neutral-50 rounded-xl p-6 lg:p-8 border border-neutral-200">
-  <h2 class="text-xl font-semibold text-neutral-900 mb-6">Get in Touch</h2>
+<div class="rounded-3xl bg-ink-950 text-white p-7 lg:p-9">
+  <h2 class="text-xl font-bold mb-6">Get in touch</h2>
 
   <div class="space-y-4">
-    <a href={`mailto:${company.email}`} class="flex items-start gap-3 text-neutral-700 hover:text-primary-600 transition-colors py-1">
-      <Mail class="h-5 w-5 text-primary-600 mt-0.5 shrink-0" />
+    <a href={`mailto:${company.email}`} class="flex items-start gap-3 text-neutral-200 hover:text-primary-400 transition-colors py-1">
+      <Mail class="h-5 w-5 text-primary-400 mt-0.5 shrink-0" />
       <span>{company.email}</span>
     </a>
-    <div class="flex items-start gap-3 text-neutral-700 py-1">
-      <Phone class="h-5 w-5 text-primary-600 mt-0.5 shrink-0" />
-      <span>{company.phone}</span>
-    </div>
-    <div class="flex items-start gap-3 text-neutral-700 py-1">
-      <MapPin class="h-5 w-5 text-primary-600 mt-0.5 shrink-0" />
-      <span>{company.location}</span>
+    {company.phone && (
+      <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="flex items-start gap-3 text-neutral-200 hover:text-primary-400 transition-colors py-1">
+        <Phone class="h-5 w-5 text-primary-400 mt-0.5 shrink-0" />
+        <span>{company.phone}</span>
+      </a>
+    )}
+    {company.address && (
+      <div class="flex items-start gap-3 text-neutral-200 py-1">
+        <MapPin class="h-5 w-5 text-primary-400 mt-0.5 shrink-0" />
+        <span>{company.address}{company.country && `, ${company.country}`}</span>
+      </div>
+    )}
+    <div class="flex items-start gap-3 text-neutral-200 py-1">
+      <Clock class="h-5 w-5 text-primary-400 mt-0.5 shrink-0" />
+      <span>We reply within one business day.</span>
     </div>
   </div>
 
-  <div class="mt-8 pt-6 border-t border-neutral-200">
-    <h3 class="text-sm font-semibold text-neutral-900 uppercase tracking-wider mb-4">Follow Us</h3>
-    <div class="space-y-3">
-      <a href={company.social.linkedin} class="flex items-center gap-2 text-sm text-neutral-600 hover:text-primary-600 transition-colors py-1" target="_blank" rel="noopener noreferrer">
+  <div class="mt-8 pt-6 border-t border-white/10">
+    <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-4">Follow us</h3>
+    <div class="flex flex-wrap gap-x-5 gap-y-2">
+      <a href={company.social.linkedin} class="flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors py-1" target="_blank" rel="noopener noreferrer">
         <ExternalLink class="h-4 w-4" /> LinkedIn
       </a>
-      <a href={company.social.github} class="flex items-center gap-2 text-sm text-neutral-600 hover:text-primary-600 transition-colors py-1" target="_blank" rel="noopener noreferrer">
+      <a href={company.social.github} class="flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors py-1" target="_blank" rel="noopener noreferrer">
         <ExternalLink class="h-4 w-4" /> GitHub
       </a>
-      <a href={company.social.twitter} class="flex items-center gap-2 text-sm text-neutral-600 hover:text-primary-600 transition-colors py-1" target="_blank" rel="noopener noreferrer">
-        <ExternalLink class="h-4 w-4" /> Twitter/X
+      <a href={company.social.twitter} class="flex items-center gap-2 text-sm text-neutral-300 hover:text-white transition-colors py-1" target="_blank" rel="noopener noreferrer">
+        <ExternalLink class="h-4 w-4" /> X (Twitter)
       </a>
     </div>
   </div>

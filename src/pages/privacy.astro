@@ -1,0 +1,228 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import LegalEntity from '../components/shared/LegalEntity.astro';
+import { company } from '../data/company';
+
+const sections = [
+  { id: 'who-we-are', label: '1. Who we are' },
+  { id: 'scope', label: '2. Scope of this policy' },
+  { id: 'website-data', label: '3. Website and enquiries' },
+  { id: 'meta-data', label: '4. Data we receive from Meta' },
+  { id: 'use', label: '5. How we use data' },
+  { id: 'never', label: '6. What we never do' },
+  { id: 'sharing', label: '7. Who we share data with' },
+  { id: 'transfers', label: '8. International transfers' },
+  { id: 'retention', label: '9. How long we keep data' },
+  { id: 'security', label: '10. Security' },
+  { id: 'deletion', label: '11. Deleting your data' },
+  { id: 'rights', label: '12. Your rights' },
+  { id: 'children', label: '13. Children' },
+  { id: 'changes', label: '14. Changes' },
+  { id: 'contact', label: '15. Contact' },
+];
+---
+
+<LegalLayout
+  title="Privacy Policy | InvigoSol"
+  heading="Privacy Policy"
+  description="How InvigoSol collects, uses and protects personal data on its website, in client services and in apps that use Meta's WhatsApp Business Platform and Facebook Login for Business."
+  intro="This policy explains what personal data InvigoSol collects, why, who we share it with and the choices you have, including for data we receive through Meta's platforms."
+  canonicalPath="/privacy"
+  sections={sections}
+>
+  <h2 id="who-we-are">1. Who we are</h2>
+  <p>
+    {company.legalName} ("InvigoSol", "we", "us") is a technology company that builds AI, software and messaging
+    solutions for businesses and operates its own software products, including
+    <a href="/products/bizagent">BizAgent</a>. For the personal data described in this policy, {company.legalName} is
+    the data controller unless section 2 says otherwise.
+  </p>
+  <LegalEntity />
+
+  <h2 id="scope">2. Scope of this policy</h2>
+  <p>This policy covers:</p>
+  <ul>
+    <li>this website, <a href={company.siteUrl}>{company.siteUrl.replace('https://', '')}</a>, and enquiries you send us;</li>
+    <li>
+      apps and integrations we operate as a <strong>Meta Tech Provider</strong>, which use the WhatsApp Business Platform
+      (Cloud API), Embedded Signup and Facebook Login for Business;
+    </li>
+    <li>personal data we handle when we deliver services to our business clients.</li>
+  </ul>
+  <p>
+    <strong>BizAgent</strong> has its own, more detailed privacy policy at
+    <a href="https://bizagent.pk/privacy/">bizagent.pk/privacy</a>, which applies to anyone who uses BizAgent. Both policies
+    are issued by {company.legalName}.
+  </p>
+  <p>
+    When we build or run systems for a client, the client usually decides why and how its customers' data is processed.
+    In that case the client is the controller and InvigoSol acts as its processor (service provider), following the
+    client's written instructions and our agreement with them.
+  </p>
+
+  <h2 id="website-data">3. Website and enquiries</h2>
+  <ul>
+    <li>
+      <strong>Contact form and email.</strong> Your name, work email, company, phone number (optional), the service you are
+      interested in and your message. We use it only to answer you and, if you become a client, to manage the relationship.
+    </li>
+    <li>
+      <strong>Technical data.</strong> Our hosting provider records standard server logs (IP address, browser type, pages
+      requested, time) to keep the site secure and working. Fonts are loaded from Google Fonts, which receives your IP
+      address when a page loads.
+    </li>
+    <li>
+      <strong>Cookies.</strong> This website does not use advertising or tracking cookies and does not run third-party
+      analytics.
+    </li>
+  </ul>
+
+  <h2 id="meta-data">4. Data we receive from Meta</h2>
+  <p>
+    Some of our apps let a business connect its WhatsApp Business Account and Meta business portfolio. When you connect
+    one of these apps, you sign in with Facebook Login for Business and choose what to share. Depending on the app and
+    the permissions you grant, we receive:
+  </p>
+  <h3>Facebook Login for Business</h3>
+  <ul>
+    <li>your name, email address and app-scoped Facebook user ID;</li>
+    <li>the business portfolio (Business Manager account) you select and its ID.</li>
+  </ul>
+  <h3>WhatsApp Business Platform (Cloud API) and Embedded Signup</h3>
+  <ul>
+    <li>WhatsApp Business Account (WABA) ID, phone number ID, display name, verified name and business profile;</li>
+    <li>
+      the content of messages and media sent to and from the connected business number, the sender's and recipient's
+      WhatsApp phone number and profile name, and timestamps;
+    </li>
+    <li>message status updates (sent, delivered, read, failed) delivered to us by webhook;</li>
+    <li>message templates and their approval status, phone number quality rating and messaging limits;</li>
+    <li>access tokens (business integration system user tokens) that let the app act for your business.</li>
+  </ul>
+  <h3>Permissions we request and why</h3>
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr><th>Permission</th><th>Why we need it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>whatsapp_business_messaging</code></td>
+          <td>Receive messages on the connected business number and send the replies and templates the business approves.</td>
+        </tr>
+        <tr>
+          <td><code>whatsapp_business_management</code></td>
+          <td>Read the WhatsApp Business Account, phone numbers and templates, and subscribe the app to message webhooks.</td>
+        </tr>
+        <tr>
+          <td><code>business_management</code></td>
+          <td>See the business portfolio you choose during Embedded Signup so the correct WhatsApp Business Account is connected.</td>
+        </tr>
+        <tr>
+          <td><code>public_profile</code></td>
+          <td>Identify the person who connected the account (name and app-scoped user ID).</td>
+        </tr>
+        <tr>
+          <td><code>email</code></td>
+          <td>Create the account and send service and security notices to the person who connected it.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    We request only the permissions an app needs for features the business has asked for. We use data received from Meta
+    ("Platform Data") in line with the <a href="https://developers.facebook.com/terms/">Meta Platform Terms</a>, the
+    <a href="https://developers.facebook.com/devpolicy/">Meta Developer Policies</a> and the
+    <a href="https://business.whatsapp.com/policy">WhatsApp Business Messaging and Business Policies</a>.
+  </p>
+
+  <h2 id="use">5. How we use data</h2>
+  <ul>
+    <li>to provide, secure and support the services and apps you or your business asked for;</li>
+    <li>to answer enquiries and manage client relationships;</li>
+    <li>to send service, billing and security messages;</li>
+    <li>to detect abuse, fraud and security incidents;</li>
+    <li>to meet legal, tax and accounting obligations.</li>
+  </ul>
+  <p>
+    Where data protection law requires a legal basis, we rely on performing a contract with you or your business, our
+    legitimate interest in running and securing our services, your consent where we ask for it, and legal obligations.
+  </p>
+
+  <h2 id="never">6. What we never do</h2>
+  <ul>
+    <li>We do not sell personal data or Platform Data.</li>
+    <li>We do not use Platform Data or message content for advertising, ad targeting or building marketing profiles.</li>
+    <li>We do not use Platform Data to make decisions about eligibility for credit, employment, housing or insurance.</li>
+    <li>We do not share Platform Data with data brokers or use it to train general-purpose AI models.</li>
+    <li>We do not send WhatsApp messages on a business's behalf without that business's instruction or approval.</li>
+  </ul>
+
+  <h2 id="sharing">7. Who we share data with</h2>
+  <p>We share personal data only as needed to run our services, with:</p>
+  <ul>
+    <li><strong>Meta Platforms</strong>, which provides the WhatsApp Business Platform and Facebook Login;</li>
+    <li><strong>cloud hosting and infrastructure providers</strong> that store and process data for us;</li>
+    <li><strong>AI model providers</strong>, where an app uses AI features, under terms that do not allow them to train on the data;</li>
+    <li><strong>email and form providers</strong> (such as Formspree for the contact form) that deliver messages to us;</li>
+    <li><strong>professional advisers and authorities</strong> where the law requires it or to protect our legal rights.</li>
+  </ul>
+  <p>
+    Each provider is bound by a contract that limits its use of the data to providing its service to us. If InvigoSol
+    is involved in a merger or acquisition, data may be transferred under this policy, and we will tell you first.
+  </p>
+
+  <h2 id="transfers">8. International transfers</h2>
+  <p>
+    Our providers may process data in countries other than yours. When we transfer personal data internationally, we use
+    providers that offer appropriate safeguards, such as standard contractual clauses, and protect the data as this policy
+    describes.
+  </p>
+
+  <h2 id="retention">9. How long we keep data</h2>
+  <ul>
+    <li><strong>Enquiries:</strong> up to 24 months after our last contact, unless you become a client.</li>
+    <li>
+      <strong>Platform Data and app data:</strong> while the business account is active. When an app is disconnected or the
+      account is closed, we delete it within 30 days, except where we must keep limited records by law.
+    </li>
+    <li><strong>Access tokens:</strong> deleted as soon as the connection is removed.</li>
+    <li><strong>Billing and contract records:</strong> as long as tax and accounting law requires.</li>
+  </ul>
+
+  <h2 id="security">10. Security</h2>
+  <p>
+    We encrypt data in transit (TLS) and encrypt access tokens and secrets at rest. Access to production data is limited to
+    staff who need it, protected by multi-factor authentication and logged. We keep data from different businesses
+    separate, and we will notify affected customers and authorities of a personal data breach as the law requires.
+  </p>
+
+  <h2 id="deletion">11. Deleting your data</h2>
+  <p>
+    You can ask us to delete your data at any time. Step-by-step instructions, including how to remove our apps from your
+    Facebook account, are on our <a href="/data-deletion">data deletion page</a>. For BizAgent, see
+    <a href="https://bizagent.pk/data-deletion/">bizagent.pk/data-deletion</a>.
+  </p>
+
+  <h2 id="rights">12. Your rights</h2>
+  <p>
+    Depending on where you live, you may have the right to access, correct, delete or export your personal data, to object
+    to or restrict its processing, and to withdraw consent. To use these rights, email
+    <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a>. We reply within 30 days. If your data was
+    shared with us by a business that uses our services, we will pass your request to that business and help it respond.
+    You may also complain to your local data protection authority.
+  </p>
+
+  <h2 id="children">13. Children</h2>
+  <p>Our website, services and apps are for businesses and are not directed at anyone under 18.</p>
+
+  <h2 id="changes">14. Changes</h2>
+  <p>
+    We may update this policy. The date at the top shows the latest version. If a change materially affects how we use
+    your data, we will tell affected customers by email or in the app before it takes effect.
+  </p>
+
+  <h2 id="contact">15. Contact</h2>
+  <p>For any privacy question or request, contact:</p>
+  <LegalEntity />
+</LegalLayout>

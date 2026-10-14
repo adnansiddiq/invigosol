@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/shared/Container.astro';
+import PageHero from '../../components/shared/PageHero.astro';
+import Button from '../../components/shared/Button.astro';
+import CTASection from '../../components/home/CTASection.astro';
+import { products } from '../../data/products';
+import { ArrowRight, ArrowUpRight } from '@lucide/astro';
+---
+
+<BaseLayout
+  title="Products | BizAgent and More by InvigoSol"
+  description="Software products built and operated by InvigoSol, including BizAgent: WhatsApp and email monitoring that shows owners how their team handles every customer."
+  canonicalPath="/products"
+>
+  <PageHero
+    eyebrow="Products"
+    title="Products we build and run ourselves"
+    subtitle="Our products put the same AI, WhatsApp and cloud engineering we deliver for clients into software any business can start using today."
+    breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Products' }]}
+  />
+
+  <section class="py-20 sm:py-24">
+    <Container>
+      <div class="grid gap-6">
+        {products.map((p) => (
+          <article class="grid gap-10 rounded-3xl border border-neutral-200 p-8 sm:p-12 lg:grid-cols-5 lg:items-center">
+            <div class="lg:col-span-3">
+              <img src={p.logo} alt={p.name} width="200" height="48" class="h-11 w-auto" />
+              <h2 class="mt-6 text-2xl sm:text-3xl font-bold text-neutral-950">{p.tagline}</h2>
+              <p class="mt-4 text-neutral-600 leading-relaxed">{p.description}</p>
+              <p class="mt-4 text-sm text-neutral-500"><strong class="text-neutral-700">For:</strong> {p.audience}</p>
+              <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                <Button href={`/products/${p.slug}`}>Learn more <ArrowRight class="h-4 w-4" /></Button>
+                <Button href={p.url} variant="outline" external>Visit {new URL(p.url).hostname} <ArrowUpRight class="h-4 w-4" /></Button>
+              </div>
+            </div>
+            <ul class="lg:col-span-2 grid gap-3">
+              {p.highlights.slice(0, 4).map((h) => (
+                <li class="rounded-2xl bg-neutral-50 p-4">
+                  <p class="text-sm font-semibold text-neutral-950">{h.title}</p>
+                  <p class="mt-1 text-xs text-neutral-600 leading-relaxed">{h.description}</p>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <CTASection title="Need a product built around your workflow?" subtitle="We design and build SaaS products and internal tools with AI at the core. Tell us what you have in mind." />
+</BaseLayout>

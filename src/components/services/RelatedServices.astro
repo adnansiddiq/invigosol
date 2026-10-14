@@ -15,8 +15,8 @@ const relatedServices = relatedSlugs
 
 {relatedServices.length > 0 && (
   <div>
-    <SectionHeading title="Related Services" subtitle="Explore our other capabilities" />
-    <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <SectionHeading eyebrow="Related" title="Services that work well together" />
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {relatedServices.map((service) => (
         <ServiceCard service={service} />
       ))}

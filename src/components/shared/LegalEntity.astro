@@ -1,0 +1,13 @@
+---
+// Legal entity block used on every legal page. Address lines render only once set in company.ts.
+import { company } from '../../data/company';
+---
+
+<p>
+  <strong>{company.legalName}</strong><br />
+  {company.address && <>{company.address}<br /></>}
+  {company.country && <>{company.country}<br /></>}
+  Email: <a href={`mailto:${company.privacyEmail}`}>{company.privacyEmail}</a><br />
+  {company.phone && <>Phone: {company.phone}<br /></>}
+  Website: <a href={company.siteUrl}>{company.siteUrl.replace('https://', '')}</a>
+</p>

@@ -1,27 +1,85 @@
 ---
 import Container from '../shared/Container.astro';
 import Button from '../shared/Button.astro';
+import { ArrowRight, Bot, MessageCircle, Sparkles, ShieldCheck } from '@lucide/astro';
+
+const capabilities = [
+  'AI agents & MCP',
+  'LLM & RAG apps',
+  'WhatsApp Cloud API',
+  'AI automation',
+  'Cloud, DevOps & LLMOps',
+  'Cybersecurity',
+];
+
+const cards = [
+  { icon: Bot, title: 'Support agent', detail: 'Resolved 4 tickets · 2 waiting for approval' },
+  { icon: MessageCircle, title: 'WhatsApp inbox', detail: '3 hot leads flagged · 0 unanswered' },
+  { icon: ShieldCheck, title: 'Guardrails', detail: 'All actions logged and policy-checked' },
+];
 ---
 
-<section class="relative bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 text-white py-20 sm:py-28 lg:py-32">
-  <Container>
-    <div class="max-w-3xl">
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-        Build Smarter. Ship Faster. Scale Fearlessly.
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-primary-100 leading-relaxed max-w-2xl">
-        We are an AI-native technology partner — engineering intelligent systems that turn ambitious
-        ideas into production-grade products. From architecture to agents, we deliver outcomes, not hours.
-      </p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-4">
-        <Button href="/services" variant="white" size="lg">
-          Explore Our Services
-        </Button>
-        <Button href="/contact" variant="outline-white" size="lg">
-          Let's Talk
-        </Button>
+<section class="relative overflow-hidden bg-ink-950 text-white">
+  <div class="absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" aria-hidden="true"></div>
+  <div class="absolute -top-40 right-0 h-[520px] w-[520px] rounded-full bg-primary-600/30 blur-[120px]" aria-hidden="true"></div>
+  <div class="absolute bottom-0 -left-20 h-72 w-72 rounded-full bg-accent-500/15 blur-[100px]" aria-hidden="true"></div>
+
+  <Container class="relative py-20 sm:py-24 lg:py-32">
+    <div class="grid items-center gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-neutral-300">
+          <Sparkles class="h-3.5 w-3.5 text-primary-400" /> AI-native engineering partner
+        </p>
+        <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05]">
+          AI that does real work <span class="text-brand-gradient">in your business.</span>
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-neutral-300 leading-relaxed max-w-2xl">
+          InvigoSol designs, builds and runs AI agents, LLM applications, WhatsApp Business integrations and the
+          cloud platforms underneath them, with guardrails and measurable results from the first pilot.
+        </p>
+        <div class="mt-9 flex flex-col sm:flex-row gap-3">
+          <Button href="/contact" size="lg">
+            Book a free consultation <ArrowRight class="h-5 w-5" />
+          </Button>
+          <Button href="/services" variant="outline-white" size="lg">Explore services</Button>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5" aria-hidden="true">
+        <div class="relative mx-auto max-w-md">
+          <div class="absolute inset-0 -m-6 rounded-[2rem] brand-gradient opacity-20 blur-2xl"></div>
+          <div class="relative rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur">
+            <div class="flex items-center gap-3 border-b border-white/10 pb-4">
+              <img src="/images/brand/logo-mark-128.png" alt="" width="40" height="40" class="h-10 w-10" />
+              <div>
+                <p class="text-sm font-semibold">Operations overview</p>
+                <p class="text-xs text-neutral-400">Today · live</p>
+              </div>
+            </div>
+            <ul class="mt-4 space-y-3">
+              {cards.map(({ icon: CardIcon, title, detail }) => (
+                <li class="flex items-start gap-3 rounded-2xl bg-white/[0.04] p-4">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-600/20 text-primary-400">
+                    <CardIcon class="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span class="block text-sm font-semibold">{title}</span>
+                    <span class="block text-xs text-neutral-400">{detail}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
+
+    <ul class="mt-16 lg:mt-20 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-8 text-sm text-neutral-400">
+      {capabilities.map((c) => (
+        <li class="flex items-center gap-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary-500"></span>{c}
+        </li>
+      ))}
+    </ul>
   </Container>
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--color-primary-700)_0%,_transparent_50%)] opacity-50"></div>
 </section>

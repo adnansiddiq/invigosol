@@ -1,17 +1,24 @@
 ---
-import { Monitor, Brain, Package, GitBranch, Building2, Bot } from '@lucide/astro';
+import {
+  Bot,
+  Sparkles,
+  Workflow,
+  MessageCircle,
+  Rocket,
+  GitBranch,
+  Building2,
+  ShieldCheck,
+} from '@lucide/astro';
 
 interface Props {
   name: string;
   class?: string;
 }
 
+const icons = { Bot, Sparkles, Workflow, MessageCircle, Rocket, GitBranch, Building2, ShieldCheck };
+
 const { name, class: className } = Astro.props;
+const Component = icons[name as keyof typeof icons] ?? Sparkles;
 ---
 
-{name === 'Monitor' && <Monitor class={className} />}
-{name === 'Brain' && <Brain class={className} />}
-{name === 'Package' && <Package class={className} />}
-{name === 'GitBranch' && <GitBranch class={className} />}
-{name === 'Building2' && <Building2 class={className} />}
-{name === 'Bot' && <Bot class={className} />}
+<Component class={className} />

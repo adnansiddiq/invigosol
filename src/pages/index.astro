@@ -2,29 +2,54 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/home/HeroSection.astro';
 import ServicesOverview from '../components/home/ServicesOverview.astro';
+import ProductsSpotlight from '../components/home/ProductsSpotlight.astro';
 import WhyChooseUs from '../components/home/WhyChooseUs.astro';
-import OpenClawSpotlight from '../components/home/OpenClawSpotlight.astro';
-import Testimonials from '../components/home/Testimonials.astro';
+import FaqSection from '../components/shared/FaqSection.astro';
 import CTASection from '../components/home/CTASection.astro';
+import { company } from '../data/company';
 
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Invigosol',
-  url: 'https://www.invigosol.com',
+  name: company.name,
+  url: company.siteUrl,
+  publisher: { '@id': `${company.siteUrl}/#organization` },
 };
+
+const faqs = [
+  {
+    question: 'What does InvigoSol do?',
+    answer:
+      'InvigoSol is an AI-native technology company. We build AI agents, generative AI and LLM applications, AI automation, WhatsApp Business API integrations, SaaS products and the cloud and DevOps platforms they run on. We also make BizAgent, a WhatsApp and email monitoring app for business owners.',
+  },
+  {
+    question: 'Which industries do you work with?',
+    answer:
+      'Any business where customer conversations, documents or repetitive back-office work slow the team down: SaaS, e-commerce, clinics and labs, real estate, travel and professional services. We work remotely with clients in Pakistan, the Gulf and beyond.',
+  },
+  {
+    question: 'How quickly can we start?',
+    answer:
+      'After a free discovery call we send a scoped proposal within a few days. Most first phases start within two weeks and deliver a working pilot in four to eight weeks.',
+  },
+  {
+    question: 'Do you work with our existing team?',
+    answer:
+      'Yes. We can deliver end to end, or work alongside your engineers with shared code, reviews and documentation so your team owns the result.',
+  },
+];
 ---
 
 <BaseLayout
-  title="Invigosol — Engineering Intelligence, Delivering Outcomes"
-  description="AI-native technology partner offering IT services, AI-driven development, DevOps, architecture design, product management, and agent development with OpenClaw."
+  title="InvigoSol | AI Agent Development & AI Automation Company"
+  description="InvigoSol builds AI agents, LLM apps, AI automation and WhatsApp Business API integrations, plus the cloud platforms they run on. Makers of BizAgent."
   canonicalPath="/"
   jsonLd={[websiteJsonLd]}
 >
   <HeroSection />
   <ServicesOverview />
+  <ProductsSpotlight />
   <WhyChooseUs />
-  <OpenClawSpotlight />
-  <Testimonials />
+  <FaqSection faqs={faqs} class="bg-neutral-50" />
   <CTASection />
 </BaseLayout>

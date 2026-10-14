@@ -1,0 +1,89 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import LegalEntity from '../components/shared/LegalEntity.astro';
+import { company } from '../data/company';
+
+const sections = [
+  { id: 'about', label: '1. About these terms' },
+  { id: 'website', label: '2. Using this website' },
+  { id: 'services', label: '3. Client services' },
+  { id: 'products', label: '4. Our products and apps' },
+  { id: 'meta', label: '5. Meta and WhatsApp rules' },
+  { id: 'ip', label: '6. Intellectual property' },
+  { id: 'liability', label: '7. Liability' },
+  { id: 'changes', label: '8. Changes' },
+  { id: 'contact', label: '9. Contact' },
+];
+---
+
+<LegalLayout
+  title="Terms of Service | InvigoSol"
+  heading="Terms of Service"
+  description="Terms for using the InvigoSol website, apps and services, including apps built on Meta's WhatsApp Business Platform and Facebook Login for Business."
+  intro="These terms apply when you use the InvigoSol website or an InvigoSol app. Client projects are also governed by a separate written agreement."
+  canonicalPath="/terms"
+  sections={sections}
+>
+  <h2 id="about">1. About these terms</h2>
+  <p>
+    These terms are between you and {company.legalName} ("InvigoSol", "we", "us"). By using our website or apps you agree
+    to them. If you use them for a business, you confirm that you can accept these terms for that business.
+  </p>
+
+  <h2 id="website">2. Using this website</h2>
+  <p>
+    The content on this website is for general information. Do not misuse the site, try to break its security, or copy
+    its content for commercial use without our permission.
+  </p>
+
+  <h2 id="services">3. Client services</h2>
+  <p>
+    Consulting, development and managed services are provided under a separate proposal, statement of work or agreement.
+    If that agreement conflicts with these terms, the agreement takes priority. Where we process personal data for a
+    client, we do so as a processor under that client's instructions.
+  </p>
+
+  <h2 id="products">4. Our products and apps</h2>
+  <p>
+    Our products, including <a href="/products/bizagent">BizAgent</a>, have their own terms (for BizAgent,
+    <a href="https://bizagent.pk/terms/">bizagent.pk/terms</a>), which apply in addition to these. You are responsible for
+    the accounts you connect, for keeping your login details safe and for the instructions you give our apps.
+  </p>
+
+  <h2 id="meta">5. Meta and WhatsApp rules</h2>
+  <p>If you connect a WhatsApp Business Account or Meta business portfolio to one of our apps, you agree to:</p>
+  <ul>
+    <li>
+      follow the <a href="https://business.whatsapp.com/policy">WhatsApp Business Messaging and Business Policies</a>, the
+      <a href="https://www.whatsapp.com/legal/business-terms">WhatsApp Business Terms of Service</a> and Meta's
+      <a href="https://www.facebook.com/legal/commercial_terms">Commercial Terms</a>;
+    </li>
+    <li>message only people who have given you permission to contact them on WhatsApp, and stop when they ask;</li>
+    <li>use Meta-approved message templates outside the 24-hour customer service window;</li>
+    <li>not send spam, prohibited content or messages that break the law;</li>
+    <li>tell your customers and staff, where the law requires it, that their messages are processed by our apps.</li>
+  </ul>
+  <p>
+    Meta may suspend a number or account that breaks its rules. We may also suspend an app connection that puts other
+    users, Meta's platform or our service at risk. Meta charges for some WhatsApp messages, and those charges are your
+    responsibility unless your plan says otherwise.
+  </p>
+
+  <h2 id="ip">6. Intellectual property</h2>
+  <p>
+    We own our website, products and brand. Ownership of work we create for clients is set out in the client agreement.
+    WhatsApp, Facebook and Meta are trademarks of Meta Platforms, Inc.; InvigoSol is not affiliated with or endorsed by Meta.
+  </p>
+
+  <h2 id="liability">7. Liability</h2>
+  <p>
+    The website and free resources are provided "as is". To the extent the law allows, we are not liable for indirect or
+    consequential losses. Nothing in these terms limits liability that cannot be limited by law.
+  </p>
+
+  <h2 id="changes">8. Changes</h2>
+  <p>We may update these terms. The date at the top shows the latest version.</p>
+
+  <h2 id="contact">9. Contact</h2>
+  <LegalEntity />
+</LegalLayout>

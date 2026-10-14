@@ -3,6 +3,7 @@ import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
 import JsonLd from '../components/shared/JsonLd.astro';
 import { company } from '../data/company';
+import { products } from '../data/products';
 import '../styles/global.css';
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
   description: string;
   canonicalPath?: string;
   ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  noindex?: boolean;
   jsonLd?: Record<string, unknown>[];
 }
 
@@ -18,24 +21,36 @@ const {
   description,
   canonicalPath = Astro.url.pathname,
   ogImage = '/images/og-default.png',
+  ogType = 'website',
+  noindex = false,
   jsonLd = [],
 } = Astro.props;
 
-const canonicalUrl = `${company.siteUrl}${canonicalPath}`;
+// Match the sitemap, which lists every page with a trailing slash.
+const canonicalUrl = `${company.siteUrl}${canonicalPath.endsWith('/') ? canonicalPath : `${canonicalPath}/`}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${company.siteUrl}${ogImage}`;
+
+const postalAddress = company.address
+  ? { address: { '@type': 'PostalAddress', streetAddress: company.address, addressCountry: company.country || undefined } }
+  : {};
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': `${company.siteUrl}/#organization`,
   name: company.name,
+  legalName: company.legalName,
   url: company.siteUrl,
-  logo: `${company.siteUrl}/images/logo.svg`,
+  logo: `${company.siteUrl}/images/brand/logo-mark.png`,
   description: company.description,
+  email: company.email,
+  ...postalAddress,
   contactPoint: {
     '@type': 'ContactPoint',
     email: company.email,
     contactType: 'sales',
   },
+  brand: products.map((p) => ({ '@type': 'Brand', name: p.name, url: p.url })),
   sameAs: [company.social.linkedin, company.social.github, company.social.twitter],
 };
 ---
@@ -50,34 +65,40 @@ const organizationJsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={company.name} />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={company.twitterHandle} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Saira+Condensed:ital,wght@1,800&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#2563eb" />
+    <meta name="theme-color" content="#e8590c" />
 
     <!-- Organization JSON-LD (all pages) -->
     <JsonLd data={organizationJsonLd} />
@@ -93,7 +114,7 @@ const organizationJsonLd = {
       Skip to content
     </a>
     <Navbar />
-    <main id="main" class="flex-1 pt-16">
+    <main id="main" class="flex-1 pt-[72px]">
       <slot />
     </main>
     <Footer />

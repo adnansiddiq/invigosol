@@ -1,0 +1,28 @@
+---
+// Dark hero used at the top of every inner page.
+import Container from './Container.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  eyebrow?: string;
+  breadcrumbs: { label: string; href?: string }[];
+}
+
+const { title, subtitle, eyebrow, breadcrumbs } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-ink-950 text-white">
+  <div class="absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]" aria-hidden="true"></div>
+  <div class="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-primary-600/30 blur-3xl" aria-hidden="true"></div>
+  <Container class="relative py-16 sm:py-20 lg:py-24">
+    <Breadcrumbs items={breadcrumbs} tone="dark" />
+    {eyebrow && <p class="mt-6 text-sm font-semibold uppercase tracking-widest text-primary-400">{eyebrow}</p>}
+    <h1 class:list={['text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-4xl', eyebrow ? 'mt-3' : 'mt-6']}>
+      {title}
+    </h1>
+    {subtitle && <p class="mt-5 text-lg sm:text-xl text-neutral-300 max-w-3xl leading-relaxed">{subtitle}</p>}
+    <slot />
+  </Container>
+</section>
