@@ -1,0 +1,20 @@
+---
+import Container from '../shared/Container.astro';
+import SectionHeading from '../shared/SectionHeading.astro';
+import ServiceCard from '../services/ServiceCard.astro';
+import { services } from '../../data/services';
+---
+
+<section class="py-16 sm:py-20">
+  <Container>
+    <SectionHeading
+      title="What We Do"
+      subtitle="Six core capabilities. One seamless delivery engine."
+    />
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {services.map((service) => (
+        <ServiceCard service={service} />
+      ))}
+    </div>
+  </Container>
+</section>

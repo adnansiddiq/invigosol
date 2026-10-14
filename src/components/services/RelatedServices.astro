@@ -1,0 +1,25 @@
+---
+import { services } from '../../data/services';
+import ServiceCard from './ServiceCard.astro';
+import SectionHeading from '../shared/SectionHeading.astro';
+
+interface Props {
+  relatedSlugs: string[];
+}
+
+const { relatedSlugs } = Astro.props;
+const relatedServices = relatedSlugs
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter((s): s is NonNullable<typeof s> => s !== undefined);
+---
+
+{relatedServices.length > 0 && (
+  <div>
+    <SectionHeading title="Related Services" subtitle="Explore our other capabilities" />
+    <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {relatedServices.map((service) => (
+        <ServiceCard service={service} />
+      ))}
+    </div>
+  </div>
+)}

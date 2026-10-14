@@ -1,0 +1,84 @@
+---
+import Container from '../shared/Container.astro';
+import { company } from '../../data/company';
+import { footerLinks } from '../../data/navigation';
+import { ExternalLink, Mail } from '@lucide/astro';
+---
+
+<footer class="bg-neutral-900 text-neutral-300">
+  <Container class="py-12 lg:py-16">
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <a href="/" class="text-xl font-bold text-white">{company.name}</a>
+        <p class="mt-3 text-sm text-neutral-400 max-w-xs">
+          {company.tagline}
+        </p>
+      </div>
+
+      <!-- Company Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h3>
+        <ul class="space-y-1">
+          {footerLinks.company.map((link) => (
+            <li>
+              <a href={link.href} class="inline-block py-2 text-sm hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Services</h3>
+        <ul class="space-y-1">
+          {footerLinks.services.map((link) => (
+            <li>
+              <a href={link.href} class="inline-block py-2 text-sm hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Connect</h3>
+        <ul class="space-y-1">
+          <li>
+            <a href={company.social.linkedin} class="inline-flex items-center gap-2 py-2 text-sm hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+              <ExternalLink class="h-4 w-4" /> LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href={company.social.github} class="inline-flex items-center gap-2 py-2 text-sm hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+              <ExternalLink class="h-4 w-4" /> GitHub
+            </a>
+          </li>
+          <li>
+            <a href={company.social.twitter} class="inline-flex items-center gap-2 py-2 text-sm hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+              <ExternalLink class="h-4 w-4" /> Twitter/X
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${company.email}`} class="inline-flex items-center gap-2 py-2 text-sm hover:text-white transition-colors">
+              <Mail class="h-4 w-4" /> {company.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-12 pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
+      <p>&copy; {new Date().getFullYear()} {company.name}. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </Container>
+</footer>

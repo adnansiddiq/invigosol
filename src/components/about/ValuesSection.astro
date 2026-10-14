@@ -1,0 +1,55 @@
+---
+import Container from '../shared/Container.astro';
+import SectionHeading from '../shared/SectionHeading.astro';
+import { Target, Code2, Eye, Cpu, TrendingUp } from '@lucide/astro';
+
+const values = [
+  {
+    icon: Target,
+    title: 'Outcome Over Output',
+    description:
+      'We measure success by business impact, not lines of code or hours logged. Every engagement starts with "what does success look like?" and every decision flows from that answer.',
+  },
+  {
+    icon: Code2,
+    title: 'Engineering Excellence',
+    description:
+      "We hold ourselves to production-grade standards on every project. Clean architecture. Comprehensive testing. Observable systems. No shortcuts that create tomorrow's tech debt.",
+  },
+  {
+    icon: Eye,
+    title: 'Radical Transparency',
+    description:
+      'Our clients see everything — the architecture decisions, the trade-offs, the code. We believe trust is built through visibility, not polished status reports.',
+  },
+  {
+    icon: Cpu,
+    title: 'AI as a First Principle',
+    description:
+      "We don't bolt AI onto existing approaches. We rethink problems through an AI-native lens — designing systems where intelligence is foundational, not decorative.",
+  },
+  {
+    icon: TrendingUp,
+    title: 'Continuous Evolution',
+    description:
+      "Technology doesn't stand still, and neither do we. We invest relentlessly in learning, experimentation, and staying ahead of the curve — so our clients stay ahead of theirs.",
+  },
+];
+---
+
+<section class="py-16 sm:py-20 bg-neutral-50">
+  <Container>
+    <SectionHeading title="What We Stand For" />
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {values.map(({ icon: ValIcon, title, description }) => (
+        <div class="bg-white rounded-xl p-6 border border-neutral-200">
+          <div class="mb-4 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600">
+            <ValIcon class="h-5 w-5" />
+          </div>
+          <h3 class="text-lg font-semibold text-neutral-900 mb-2">{title}</h3>
+          <p class="text-sm text-neutral-600 leading-relaxed">{description}</p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

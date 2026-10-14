@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/shared/Container.astro';
+import Breadcrumbs from '../../components/shared/Breadcrumbs.astro';
+import ServiceCard from '../../components/services/ServiceCard.astro';
+import { services } from '../../data/services';
+---
+
+<BaseLayout
+  title="Our Services | Invigosol"
+  description="Six core technology capabilities — IT services, AI development, product management, DevOps, architecture design, and AI agent development — delivered as one integrated approach."
+  canonicalPath="/services"
+>
+  <section class="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-16 sm:py-20">
+    <Container>
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">Our Services</h1>
+      <p class="mt-4 text-lg sm:text-xl text-primary-100 max-w-3xl">
+        Six capabilities. One integrated approach. We bring together AI, engineering, and product
+        thinking to deliver technology that works — in production, at scale, under pressure.
+      </p>
+    </Container>
+  </section>
+
+  <section class="py-16 sm:py-20">
+    <Container>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

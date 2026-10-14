@@ -1,0 +1,17 @@
+---
+import { Monitor, Brain, Package, GitBranch, Building2, Bot } from '@lucide/astro';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+{name === 'Monitor' && <Monitor class={className} />}
+{name === 'Brain' && <Brain class={className} />}
+{name === 'Package' && <Package class={className} />}
+{name === 'GitBranch' && <GitBranch class={className} />}
+{name === 'Building2' && <Building2 class={className} />}
+{name === 'Bot' && <Bot class={className} />}

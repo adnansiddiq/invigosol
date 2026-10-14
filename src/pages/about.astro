@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/shared/Container.astro';
+import Breadcrumbs from '../components/shared/Breadcrumbs.astro';
+import MissionVision from '../components/about/MissionVision.astro';
+import ValuesSection from '../components/about/ValuesSection.astro';
+import TeamSection from '../components/about/TeamSection.astro';
+---
+
+<BaseLayout
+  title="About Invigosol — AI-Native Technology Services"
+  description="Learn about Invigosol's mission, values, and the team behind our AI-native technology services. Engineering intelligence for forward-thinking companies."
+  canonicalPath="/about"
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary-900 to-primary-700 text-white py-16 sm:py-20">
+    <Container>
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
+        We Engineer the Future of Software
+      </h1>
+      <p class="mt-4 text-lg sm:text-xl text-primary-100 max-w-3xl">
+        Invigosol is a technology services company built for the AI era. We help organizations
+        design, build, and operate intelligent systems that deliver measurable business outcomes.
+      </p>
+    </Container>
+  </section>
+
+  <!-- Company Story -->
+  <section class="py-16 sm:py-20">
+    <Container>
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-bold text-neutral-900 mb-6">Our Story</h2>
+        <div class="space-y-4 text-neutral-700 leading-relaxed">
+          <p>
+            Invigosol was founded on a simple belief: technology services should deliver outcomes,
+            not just output.
+          </p>
+          <p>
+            In a world where every company is becoming a software company — and every software
+            company is becoming an AI company — we saw a gap. Too many organizations were drowning in
+            consultants who delivered slide decks but not production systems. Too many engineering
+            teams were stuck maintaining legacy architecture while competitors shipped AI-native
+            products.
+          </p>
+          <p>We built Invigosol to close that gap.</p>
+          <p>
+            We are a team of engineers, architects, and product thinkers who operate at the
+            intersection of AI, modern engineering, and product strategy. We don't just advise — we
+            build. We don't just build — we own the outcome.
+          </p>
+          <p>
+            From cloud infrastructure to autonomous agents, from MVP to scale — Invigosol is where
+            ambition meets execution.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <MissionVision />
+  <ValuesSection />
+  <TeamSection />
+</BaseLayout>

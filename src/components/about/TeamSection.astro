@@ -1,0 +1,50 @@
+---
+import Container from '../shared/Container.astro';
+import SectionHeading from '../shared/SectionHeading.astro';
+import PlaceholderImage from '../shared/PlaceholderImage.astro';
+
+const team = [
+  {
+    name: 'Founder & CEO',
+    role: 'Founder & CEO',
+    bio: '15+ years in technology leadership. Background in distributed systems and AI/ML.',
+  },
+  {
+    name: 'Chief Technology Officer',
+    role: 'CTO',
+    bio: 'Deep expertise in cloud architecture, DevOps, and AI systems. Previously architected platforms serving millions of users.',
+  },
+  {
+    name: 'Head of AI',
+    role: 'Head of AI & Agent Development',
+    bio: 'Specializes in AI agent systems, LLM orchestration, and production ML. Creator of OpenClaw framework.',
+  },
+  {
+    name: 'Head of Product',
+    role: 'Head of Product & Delivery',
+    bio: 'Product strategist with experience shipping products across SaaS, FinTech, and HealthTech.',
+  },
+];
+---
+
+<section class="py-16 sm:py-20">
+  <Container>
+    <SectionHeading
+      title="The People Behind the Engineering"
+    />
+    <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      {team.map((member) => (
+        <div class="text-center">
+          <PlaceholderImage
+            label={member.role}
+            aspectRatio="1/1"
+            class="w-full max-w-[200px] mx-auto rounded-full mb-4"
+          />
+          <h3 class="text-lg font-semibold text-neutral-900">{member.name}</h3>
+          <p class="text-sm text-primary-600 font-medium mb-2">{member.role}</p>
+          <p class="text-sm text-neutral-600">{member.bio}</p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

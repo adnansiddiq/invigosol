@@ -1,0 +1,24 @@
+---
+import { Camera } from '@lucide/astro';
+
+interface Props {
+  label: string;
+  aspectRatio?: '16/9' | '4/3' | '1/1';
+  class?: string;
+}
+
+const { label, aspectRatio = '16/9', class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-neutral-200 to-neutral-300',
+    className,
+  ]}
+  style={`aspect-ratio: ${aspectRatio};`}
+  role="img"
+  aria-label={label}
+>
+  <Camera class="h-8 w-8 text-neutral-400 mb-2" />
+  <span class="text-sm text-neutral-500">{label}</span>
+</div>

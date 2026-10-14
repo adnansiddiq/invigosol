@@ -1,0 +1,172 @@
+---
+import { mainNav } from '../../data/navigation';
+import Container from '../shared/Container.astro';
+import { Menu, X, ChevronDown } from '@lucide/astro';
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
+  <Container>
+    <nav class="flex items-center justify-between h-16" aria-label="Main navigation">
+      <a href="/" class="text-xl font-bold text-primary-600">
+        Invigosol
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-8">
+        {mainNav.map((link) => (
+          <div class={link.children ? 'relative group' : ''}>
+            <a
+              href={link.href}
+              class:list={[
+                'flex items-center gap-1 text-sm font-medium transition-colors py-2',
+                isActive(link.href) ? 'text-primary-600' : 'text-neutral-700 hover:text-primary-600',
+              ]}
+            >
+              {link.label}
+              {link.children && <ChevronDown class="h-4 w-4" />}
+            </a>
+            {link.children && (
+              <div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="bg-white rounded-lg shadow-lg border border-neutral-200 py-2 min-w-[220px]">
+                  {link.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class:list={[
+                        'block px-4 py-2.5 text-sm transition-colors',
+                        isActive(child.href)
+                          ? 'text-primary-600 bg-primary-50'
+                          : 'text-neutral-700 hover:text-primary-600 hover:bg-neutral-50',
+                      ]}
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
+        >
+          Contact Us
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button
+        id="mobile-menu-toggle"
+        class="lg:hidden flex items-center justify-center w-11 h-11 rounded-lg text-neutral-700 hover:bg-neutral-100 transition-colors"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Menu class="h-6 w-6" />
+      </button>
+    </nav>
+  </Container>
+
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu-backdrop" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden" aria-hidden="true"></div>
+
+<!-- Mobile Menu Panel -->
+<div
+  id="mobile-menu"
+  class="fixed top-0 right-0 h-full w-[280px] bg-white shadow-xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+  role="dialog"
+  aria-label="Mobile navigation"
+>
+  <div class="flex items-center justify-between p-4 border-b border-neutral-200">
+    <span class="text-lg font-bold text-primary-600">Invigosol</span>
+    <button
+      id="mobile-menu-close"
+      class="flex items-center justify-center w-11 h-11 rounded-lg text-neutral-700 hover:bg-neutral-100 transition-colors"
+      aria-label="Close menu"
+    >
+      <X class="h-6 w-6" />
+    </button>
+  </div>
+  <nav class="p-4" aria-label="Mobile navigation">
+    <ul class="space-y-1">
+      {mainNav.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'block px-4 py-3 rounded-lg text-base font-medium transition-colors',
+              isActive(link.href) ? 'text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50',
+            ]}
+          >
+            {link.label}
+          </a>
+          {link.children && (
+            <ul class="ml-4 mt-1 space-y-1">
+              {link.children.map((child) => (
+                <li>
+                  <a
+                    href={child.href}
+                    class:list={[
+                      'block px-4 py-2.5 rounded-lg text-sm transition-colors',
+                      isActive(child.href)
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-neutral-600 hover:bg-neutral-50',
+                    ]}
+                  >
+                    {child.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+    <div class="mt-6 px-4">
+      <a
+        href="/contact"
+        class="flex items-center justify-center w-full min-h-[44px] px-5 py-3 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
+      >
+        Contact Us
+      </a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const close = document.getElementById('mobile-menu-close');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+
+  function openMenu() {
+    menu?.classList.remove('translate-x-full');
+    backdrop?.classList.remove('hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu?.classList.add('translate-x-full');
+    backdrop?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle?.addEventListener('click', openMenu);
+  close?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>

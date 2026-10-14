@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import ServicesOverview from '../components/home/ServicesOverview.astro';
+import WhyChooseUs from '../components/home/WhyChooseUs.astro';
+import OpenClawSpotlight from '../components/home/OpenClawSpotlight.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+import CTASection from '../components/home/CTASection.astro';
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Invigosol',
+  url: 'https://www.invigosol.com',
+};
+---
+
+<BaseLayout
+  title="Invigosol — Engineering Intelligence, Delivering Outcomes"
+  description="AI-native technology partner offering IT services, AI-driven development, DevOps, architecture design, product management, and agent development with OpenClaw."
+  canonicalPath="/"
+  jsonLd={[websiteJsonLd]}
+>
+  <HeroSection />
+  <ServicesOverview />
+  <WhyChooseUs />
+  <OpenClawSpotlight />
+  <Testimonials />
+  <CTASection />
+</BaseLayout>

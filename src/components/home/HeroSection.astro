@@ -1,0 +1,27 @@
+---
+import Container from '../shared/Container.astro';
+import Button from '../shared/Button.astro';
+---
+
+<section class="relative bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 text-white py-20 sm:py-28 lg:py-32">
+  <Container>
+    <div class="max-w-3xl">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+        Build Smarter. Ship Faster. Scale Fearlessly.
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-primary-100 leading-relaxed max-w-2xl">
+        We are an AI-native technology partner — engineering intelligent systems that turn ambitious
+        ideas into production-grade products. From architecture to agents, we deliver outcomes, not hours.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4">
+        <Button href="/services" variant="white" size="lg">
+          Explore Our Services
+        </Button>
+        <Button href="/contact" variant="outline-white" size="lg">
+          Let's Talk
+        </Button>
+      </div>
+    </div>
+  </Container>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--color-primary-700)_0%,_transparent_50%)] opacity-50"></div>
+</section>

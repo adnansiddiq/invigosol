@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/shared/Container.astro';
+import Button from '../../components/shared/Button.astro';
+import SectionHeading from '../../components/shared/SectionHeading.astro';
+import ServiceDetailHero from '../../components/services/ServiceDetailHero.astro';
+import ServiceFeatureList from '../../components/services/ServiceFeatureList.astro';
+import RelatedServices from '../../components/services/RelatedServices.astro';
+import { services, type Service } from '../../data/services';
+import { company } from '../../data/company';
+import { AlertCircle } from '@lucide/astro';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  description: service.meta.description,
+  provider: {
+    '@type': 'Organization',
+    name: company.name,
+    url: company.siteUrl,
+  },
+  url: `${company.siteUrl}/services/${service.slug}`,
+};
+---
+
+<BaseLayout
+  title={service.meta.title}
+  description={service.meta.description}
+  canonicalPath={`/services/${service.slug}`}
+  jsonLd={[serviceJsonLd]}
+>
+  <ServiceDetailHero title={service.title} tagline={service.tagline} />
+
+  <!-- Long Description -->
+  <section class="py-16 sm:py-20">
+    <Container>
+      <div class="max-w-3xl">
+        <p class="text-lg text-neutral-700 leading-relaxed">{service.longDescription}</p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Challenges We Solve -->
+  <section class="py-16 sm:py-20 bg-neutral-50">
+    <Container>
+      <SectionHeading title="Challenges We Solve" align="left" />
+      <ul class="mt-8 grid gap-4 md:grid-cols-2">
+        {service.challenges.map((challenge) => (
+          <li class="flex items-start gap-3 rounded-lg bg-white p-4 border border-neutral-200">
+            <AlertCircle class="h-5 w-5 text-primary-600 mt-0.5 shrink-0" />
+            <span class="text-neutral-700">{challenge}</span>
+          </li>
+        ))}
+      </ul>
+    </Container>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 sm:py-20">
+    <Container>
+      <SectionHeading title="What We Deliver" subtitle="Core capabilities of this service" />
+      <div class="mt-10">
+        <ServiceFeatureList features={service.features} />
+      </div>
+    </Container>
+  </section>
+
+  <!-- Process Steps -->
+  <section class="py-16 sm:py-20 bg-neutral-50">
+    <Container>
+      <SectionHeading title="How We Work" subtitle="Our proven delivery process" />
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {service.processSteps.map((step) => (
+          <div class="relative">
+            <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary-600 text-white font-bold text-sm mb-4">
+              {step.step}
+            </div>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-2">{step.title}</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Related Services -->
+  <section class="py-16 sm:py-20">
+    <Container>
+      <RelatedServices relatedSlugs={service.relatedSlugs} />
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20 bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+    <Container class="text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold">
+        Ready to discuss your {service.title.toLowerCase()} needs?
+      </h2>
+      <p class="mt-4 text-primary-100 max-w-xl mx-auto">
+        Let's talk about how we can help your team deliver better results, faster.
+      </p>
+      <div class="mt-8">
+        <Button href="/contact" variant="outline-white">
+          Get in Touch
+        </Button>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/shared/Container.astro';
+import Button from '../components/shared/Button.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | Invigosol"
+  description="The page you're looking for doesn't exist or has been moved."
+>
+  <section class="py-24 sm:py-32">
+    <Container class="text-center">
+      <p class="text-6xl font-bold text-primary-600 mb-4">404</p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4">Page Not Found</h1>
+      <p class="text-lg text-neutral-600 mb-8 max-w-md mx-auto">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <Button href="/" variant="primary">Back to Home</Button>
+    </Container>
+  </section>
+</BaseLayout>

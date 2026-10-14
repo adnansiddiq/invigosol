@@ -1,0 +1,52 @@
+---
+import Container from '../shared/Container.astro';
+import SectionHeading from '../shared/SectionHeading.astro';
+import { Cpu, ArrowRightLeft, ShieldCheck, Eye } from '@lucide/astro';
+
+const pillars = [
+  {
+    icon: Cpu,
+    title: 'AI-Native by Design',
+    description:
+      "AI isn't an add-on for us — it's woven into how we architect, develop, and deliver. Every solution we build is designed for an AI-first world, from day one.",
+  },
+  {
+    icon: ArrowRightLeft,
+    title: 'End-to-End Ownership',
+    description:
+      'Strategy. Architecture. Development. Deployment. Maintenance. We own the entire lifecycle so nothing falls through the cracks between handoffs.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Production-Grade, Always',
+    description:
+      'Prototypes are easy. Production is hard. We specialize in the last mile — taking systems from "it works in demo" to "it works at 10,000 requests per second."',
+  },
+  {
+    icon: Eye,
+    title: 'Transparent Partnership',
+    description:
+      'No black boxes. No vendor lock-in. We work as an extension of your team with full visibility into architecture decisions, code, and progress.',
+  },
+];
+---
+
+<section class="py-16 sm:py-20 bg-neutral-50">
+  <Container>
+    <SectionHeading
+      title="Why Invigosol"
+      subtitle="We don't just build technology. We engineer outcomes."
+    />
+    <div class="mt-10 grid gap-8 md:grid-cols-2">
+      {pillars.map(({ icon: IconComponent, title, description }) => (
+        <div class="bg-white rounded-xl p-6 border border-neutral-200">
+          <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary-50 text-primary-600">
+            <IconComponent class="h-6 w-6" />
+          </div>
+          <h3 class="text-lg font-semibold text-neutral-900 mb-2">{title}</h3>
+          <p class="text-sm text-neutral-600 leading-relaxed">{description}</p>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>
