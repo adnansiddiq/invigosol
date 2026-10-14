@@ -1,17 +1,12 @@
 ---
-// Horizontal lockup: the logo mark plus the INVIGO/SOL wordmark set in the brand font.
+// Horizontal lockup (mark + wordmark), vector master from brand-kit/logos/svg.
 interface Props {
   tone?: 'light' | 'dark';
   class?: string;
 }
 
 const { tone = 'light', class: className } = Astro.props;
+const src = tone === 'light' ? '/images/brand/invigosol-logo-horizontal.svg' : '/images/brand/invigosol-logo-horizontal-white.svg';
 ---
 
-<span class:list={['inline-flex items-center gap-2', className]}>
-  <img src="/images/brand/logo-mark-128.png" alt="" width="36" height="36" class="h-9 w-9" />
-  <span class="font-[family-name:var(--font-brand)] text-[1.6rem] font-extrabold italic uppercase leading-none tracking-tight">
-    <span class={tone === 'light' ? 'text-neutral-950' : 'text-white'}>Invigo</span><span class="text-primary-500">Sol</span>
-  </span>
-  <span class="sr-only">InvigoSol</span>
-</span>
+<img src={src} alt="InvigoSol" width="155" height="48" class:list={['h-12 w-auto', className]} />

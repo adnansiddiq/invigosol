@@ -73,10 +73,12 @@ plans change, update `plans` and `pricingNote` in `products.ts`.
   - Plus Jakarta Sans for headings.
   - Saira Condensed italic 800 for the wordmark and step numbers.
 - **Logo:**
-  - Source: `public/images/brand/logo.jpg` (907×907, white background).
+  - Master: `public/images/brand/logo.jpg` (907×907 JPG). The vector redraw lives in `brand-kit/logos/svg/`.
+  - Website copies: `public/images/brand/invigosol-logo-horizontal(-white).svg`, `invigosol-icon.svg` and `/favicon.svg`.
   - Derived files: `logo-mark.png` / `logo-mark-128.png` (transparent mark), `logo-full.png`, `icon-192/512.png`,
     `/favicon.ico`, `/favicon-32.png`, `/apple-touch-icon.png`.
-  - The navbar/footer lockup is `src/components/shared/Logo.astro`: the mark plus "INVIGO" + "SOL" in the brand font.
+  - The navbar/footer lockup is `src/components/shared/Logo.astro`, which renders the horizontal SVG (white version in the footer).
+  - The social media kit (covers, profile pictures, posts) is in `brand-kit/`. See `brand-kit/README.md`.
   - To regenerate the derived files, crop the mark region of the JPG, turn white into transparency, and resize.
 - **Share image:** `public/images/og-default.png` (1200×630). It's rendered from an SVG with `rsvg-convert`. Re-render it if the
   tagline or logo changes.
